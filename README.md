@@ -6,38 +6,27 @@ This is setup to configure neovim with a few key considerations:
 
 # How to use
 ## On Linux
-+ Clone the Repo into any directory (let's call it `.`).
++ Clone the Repo into `~/.config/nvim/`
 ```bash
-git clone https://github.com/Shubbak/nvim-setup.git
+git clone https://github.com/Shubbak/nvim-setup.git ~/.config/nvim
 ```
-+ Move `./nvim-setup/nvim` to `~/.config/` 
++ Make sure the script in `~/.config/nvim/scripts` is executable
 ```bash
-mv ./nvim-setup/nvim ~/.config/
+chmod +x ~/.config/nvim/scripts/script_linux.sh
 ```
-+ Make sure the script in `./nvim-setup/scripts` is executable
++ Run the appropriate script in `~/.config/nvim/scripts`
 ```bash
-chmod +x ./nvim-setup/scripts/script_linux.sh
-```
-+ Run the appropriate script in `./nvim-setup/scripts`
-```bash
-# Navigate to .
-./nvim-setup/scripts/script_linux.sh
+~/.config/nvim/scripts/script_linux.sh
 ``` 
-+ Open nvim and run `:PlugInstall`
 
 ## On Windows
-+ Clone the Repo into any directory (let's call it `.`).
++ Clone the Repo into `~\AppData\Local\`
 ```bash
-git clone https://github.com/Shubbak/nvim-setup.git
-```
-+ Move `.\nvim-setup\nvim` to `~\AppData\Local\`
-```Powershell
-mv .\nvim-setup\nvim ~\AppData\Local\
+git clone https://github.com/Shubbak/nvim-setup.git ~\AppData\Local\nvim
 ```
 + Run the appropriate script in `.\nvim-setup\scripts`
 ```Powershell
-# Navigate to .
-.\scripts\script_windows.ps1
+~\AppData\Local\nvim\scripts\script_windows.ps1
 ```
 
 
