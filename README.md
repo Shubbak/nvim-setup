@@ -34,5 +34,5 @@ git clone https://github.com/Shubbak/nvim-setup.git ~\AppData\Local\nvim
 + Check whether the two fonts `MesloLGM Nerd Font Mono` and `Kawkab Mono` are correctly installed.
 + Check whether nvim can access python3 with `:checkhealth provider.python`
 + Recommended to install latexmk (included in Linux script)
-
++ Sometimes neovide just doesn't want to. In that case ask ChatGPT :)
 
