@@ -36,3 +36,4 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 + Recommended to install latexmk (included in Linux script)
 + Sometimes neovide just doesn't want to. In that case ask ChatGPT :)
 + In case you want to add an alias in Windows, call `nvim $PROFILE` and add `New-Alias your-alias nvim` to the last line
++ If in Windows running the script doesn't do anything, try running winget and see if it prompts you to grant it rights.
