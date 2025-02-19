@@ -44,7 +44,7 @@ fi
 if ! command -v zathura &> /dev/null
 then 
     echo "Installing zathura..."
-    sudo apt install zathura
+    sudo apt install -y zathura
     echo "zathura installed."
 else
     echo "zathura already installed."
