@@ -192,8 +192,8 @@ if has('gui_running')
     set background=dark 
 else 
     " For terminal Neovim, use a different colorscheme 
-    colorscheme gruvbox 
-    set background=dark 
+    " colorscheme gruvbox 
+    " set background=dark 
 
     " Set terminal cursor shape settings 
     let &t_SI = "\e[5 q" 
