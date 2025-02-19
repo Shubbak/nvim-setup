@@ -12,7 +12,7 @@ git clone https://github.com/Shubbak/nvim-setup.git
 ```
 + Move `./nvim-setup/nvim` to `~/.config/` 
 ```bash
-mv -r ./nvim-setup/nvim ~/.config/
+mv ./nvim-setup/nvim ~/.config/
 ```
 + Make sure the script in `./nvim-setup/scripts` is executable
 ```bash
