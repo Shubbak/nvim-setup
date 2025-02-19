@@ -58,11 +58,32 @@ if (-not (Test-Path $kawkabFontFile)) {
 
     Invoke-WebRequest -Uri $kawkabUrl -OutFile $kawkabZip -UseBasicParsing
     Expand-Archive -Path $kawkabZip -DestinationPath $FontDir -Force
+
+    # Move the files out of the subfolder and into the Fonts directory
+    $extractedFolder = Join-Path $FontDir "kawkab-mono-0.500"
+    if (Test-Path $extractedFolder) {
+        Get-ChildItem -Path $extractedFolder -File | Move-Item -Destination $FontDir
+        Remove-Item -Recurse -Force $extractedFolder
+    }
+
     Remove-Item $kawkabZip
     Write-Host "$FONT_NAME_KAWKAB installed successfully."
 } else {
     Write-Host "$FONT_NAME_KAWKAB is already installed."
 }
+
+
+# Force a refresh of the font files
+$fontFiles = Get-ChildItem -Path $fontDir -Filter *.ttf
+
+foreach ($font in $fontFiles) {
+    $fontName = [System.IO.Path]::GetFileNameWithoutExtension($font.FullName)
+    Write-Host "Registering font: $fontName"
+    $fontRegKey = "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+    Set-ItemProperty -Path $fontRegKey -Name $fontName -Value $font.FullName
+}
+
+& "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters"
 
 # Add Neovim to PATH if not already present
 $nvimPath = "$env:ProgramFiles\Neovim\bin"
