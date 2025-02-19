@@ -188,8 +188,8 @@ if has('gui_running')
     set spell spelllang=de 
  
     " Use a preferred colorscheme for GUI 
-    colorscheme one 
-    set background=dark 
+    " colorscheme one 
+    " set background=dark 
 else 
     " For terminal Neovim, use a different colorscheme 
     " colorscheme gruvbox 
@@ -200,6 +200,8 @@ else
     let &t_EI = "\e[2 q" 
 endif 
  
+colorscheme one 
+set background=dark 
 
 " Disable error and visual bells 
 set noerrorbells visualbell t_vb= 
