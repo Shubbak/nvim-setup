@@ -36,7 +36,7 @@ if (-not (Test-Path $FontDir)) {
     New-Item -ItemType Directory -Path $FontDir | Out-Null
 }
 
-$mesloFontFile = Join-Path $FontDir "MesloLGM NF Regular.ttf"
+$mesloFontFile = Join-Path $FontDir "MesloLGMNerdFontMono-Regular.ttf"
 if (-not (Test-Path $mesloFontFile)) {
     Write-Host "$FONT_NAME_MESLO not found, installing..."
     $mesloUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
@@ -65,7 +65,7 @@ if (-not (Test-Path $kawkabFontFile)) {
 }
 
 # Add Neovim to PATH if not already present
-$nvimPath = "$env:LOCALAPPDATA\nvim"
+$nvimPath = "$env:ProgramFiles\Neovim\bin"
 $path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::User)
 
 if ($path -notlike "*$nvimPath*") {
@@ -77,4 +77,4 @@ if ($path -notlike "*$nvimPath*") {
 }
 
 # Install Plugins using vim-plug
-"$nvimPath\nvim.exe" --headless +PlugInstall +qall
+& "$nvimPath\nvim.exe" --headless +PlugInstall +qall
