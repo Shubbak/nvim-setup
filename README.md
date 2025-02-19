@@ -22,7 +22,7 @@ chmod +x ~/.config/nvim/scripts/script_linux.sh
 ## On Windows
 + Clone the Repo into `~\AppData\Local\`
 ```bash
-git clone https://github.com/Shubbak/nvim-setup.git ~\AppData\Local\nvim
+git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Local\nvim
 ```
 + Run the appropriate script in `.\nvim-setup\scripts`
 ```Powershell
