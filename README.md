@@ -35,4 +35,4 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 + Check whether nvim can access python3 with `:checkhealth provider.python`
 + Recommended to install latexmk (included in Linux script)
 + Sometimes neovide just doesn't want to. In that case ask ChatGPT :)
-
++ In case you want to add an alias in Windows, call `nvim $PROFILE` and add `New-Alias your-alias nvim` to the last line

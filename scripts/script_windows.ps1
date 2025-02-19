@@ -80,21 +80,3 @@ if ($path -notlike "*$nvimPath*") {
 & "$nvimPath\nvim.exe" --headless +PlugInstall +qall 2>$null
 
 
-# Check if alias for vim exists in $PROFILE, if not, add it
-$aliasCommandvim = 'New-Alias vim nvim'
-$aliasCommandgvim = 'New-Alias gvim neovide'
-if (-not (Select-String -Path $PROFILE -Pattern "New-Alias vim nvim" -Quiet)) {
-    Add-Content -Path $PROFILE -Value "`n$aliasCommandvim"
-    Write-Host "Alias 'vim' added to $PROFILE."
-} else {
-    Write-Host "Alias 'vim' already exists in $PROFILE."
-}
-if (-not (Select-String -Path $PROFILE -Pattern "New-Alias gvim neovide" -Quiet)) {
-    Add-Content -Path $PROFILE -Value "`n$aliasCommandgvim"
-    Write-Host "Alias 'gvim' added to $PROFILE."
-} else {
-    Write-Host "Alias 'gvim' already exists in $PROFILE."
-}
-
-# Reload profile (optional)
-. $PROFILE
