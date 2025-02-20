@@ -10,14 +10,25 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
 
 " ============================================================================== 
-" Neovim init.vim - Optimized for Ubuntu (adapted from a Windows gvim vimrc) 
-" Place this file at: ~/.config/nvim/init.vim 
+" Neovim init.vim - Optimized for working on Ubuntu as well as Windows 
+" Place this file at: ~/.config/nvim/init.vim for Ubuntu or
+" ~\AppData\Local\nvim\init.vim for Windows.
 " ============================================================================== 
  
 " ------------------------------------------------------------------------------ 
 " PLUGINS (using vim-plug) 
 " ------------------------------------------------------------------------------ 
-call plug#begin('~/.local/share/nvim/plugged') 
+
+" Set up the plugin directory based on the operating system
+if has('win32') || has('win64')
+    " For Windows, use the LOCALAPPDATA environment variable
+    let s:plug_dir = expand($LOCALAPPDATA . '\nvim\plugged')
+else
+    " For Linux (and other Unix-like systems), use the standard config path
+    let s:plug_dir = expand('~/.config/nvim/plugged')
+endif
+
+call plug#begin(s:plug_dir) 
  
 " NERDTree for file browsing 
 Plug 'preservim/nerdtree' 
@@ -26,10 +37,11 @@ Plug 'preservim/nerdtree'
 Plug 'lervag/vimtex' 
 let g:tex_flavor = 'latex' 
 " For Ubuntu, we typically use zathura as the PDF viewer: 
-let g:vimtex_view_method = 'zathura' 
-" Alternative viewer settings (for reference): 
-" let g:vimtex_view_general_viewer = 'okular' 
-" let g:vimtex_view_general_options = '--unique file:@pdf#src:@line@tex' 
+if has('win32') || has('win64')
+  let g:vimtex_view_method = 'general' 
+else
+    let g:vimtex_view_method = 'zathura'
+endif
 let g:vimtex_quickfix_mode = 0 
 let g:vimtex_complete_close_braces = 1 
  
@@ -43,6 +55,8 @@ Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>' 
 let g:UltiSnipsJumpForwardTrigger = '<tab>' 
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' 
+
+Plug 'honza/vim-snippets'
  
 " Git integration with vim-fugitive 
 Plug 'tpope/vim-fugitive' 
@@ -62,15 +76,17 @@ syntax on
 " Line numbering: absolute and relative toggle 
 set number 
 
-" if has('autocmd') 
-  " augroup numbertoggle 
-    " autocmd! 
-    " autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &number && mode() != "i" | set rnu | endif 
-    " autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &number | set nornu | endif 
-  " augroup END 
-" else 
-  " set rnu 
-" endif 
+if has('autocmd') 
+  augroup numbertoggle 
+    autocmd! 
+    " When entering insert mode, disable relative numbers
+    autocmd InsertEnter * set norelativenumber
+    " When leaving insert mode, enable relative numbers
+    autocmd InsertLeave * set relativenumber
+  augroup END 
+else 
+  set rnu 
+endif 
  
 " Disable swap files 
 set noswapfile 
@@ -114,8 +130,8 @@ set history=1000
 " ------------------------------------------------------------------------------ 
  
 " Exit insert mode with <M-SPACE> or 'jk' 
-inoremap <M-SPACE> <ESC> 
-inoremap jk <ESC> 
+" inoremap <M-SPACE> <ESC>
+inoremap jk <ESC>
 inoremap <M-i> <ESC>o\item<Space> 
 nnoremap <M-i> o\item<Space> 
  
@@ -153,6 +169,11 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " Set files/directories to ignore in NERDTree 
 let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$', '\.aux$', '\.bbl$', '\.bcf$', '\.blg$', '\.fdb_latexmk$', '\.fls$', '\.glg$', '\.glo$', '\.gls$', '\.ist$', '\.log$', '\.out$', '\.xml$', '\.gz$', '\.latexmain$', '\.toc$', '\.xdv$', '\.tdn$', '\.tld$', '\.tlg', '\.bdn', '\.bld', '\.ldn', '\.lld', '\.llg', '\.ttf', '\.zip'] 
  
+ 
+" Map the Guillemet symbol
+" inoremap << «
+" inoremap >> »
+"
 " Map enter to open new line without leaving normal mode
 nnoremap <enter> o<esc>k
 
@@ -161,9 +182,8 @@ nnoremap <enter> o<esc>k
 " ------------------------------------------------------------------------------ 
 if has('gui_running') 
     " Set the GUI font 
-    " set guifont=MesloLGM\ NFM:h12 
     set guifont=MesloLGM\ Nerd\ Font\ Mono
-    " Maximizing the window (the simalt command is Windows-specific and has been removed) 
+
     " Optionally, open NERDTree on startup: 
     " au VimEnter * NERDTree 
  
@@ -175,20 +195,16 @@ if has('gui_running')
     " set background=dark 
 else 
     " For terminal Neovim, use a different colorscheme 
-    " colorscheme quiet 
- 
+    " colorscheme gruvbox 
+    " set background=dark 
 
     " Set terminal cursor shape settings 
     let &t_SI = "\e[5 q" 
     let &t_EI = "\e[2 q" 
 endif 
  
-if has('gui_running')
-    colorscheme one
-else
-    colorscheme gruvbox
-    set background=dark
-endif
+colorscheme one 
+set background=dark 
 
 " Disable error and visual bells 
 set noerrorbells visualbell t_vb= 
@@ -264,4 +280,3 @@ nnoremap <Leader>f :<C-U>call FontMeslo()<CR>
 "
 "
 "
-"السلام عليكمتن 
