@@ -169,11 +169,13 @@ nnoremap <C-Right> <C-w>>
 nnoremap <leader>nt :NERDTreeToggle<CR> 
  
 " Set files/directories to ignore in NERDTree 
-" let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$', '\.aux$', '\.bbl$', '\.bcf$', '\.blg$', '\.fdb_latexmk$', '\.fls$', '\.glg$', '\.glo$', '\.gls$', '\.ist$', '\.log$', '\.out$', '\.xml$', '\.gz$', '\.latexmain$', '\.toc$', '\.xdv$', '\.tdn$', '\.tld$', '\.tlg', '\.bdn', '\.bld', '\.ldn', '\.lld', '\.llg', '\.ttf', '\.zip'] 
+let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$', '\.aux$', '\.bbl$', '\.bcf$', '\.blg$', '\.fdb_latexmk$', '\.fls$', '\.glg$', '\.glo$', '\.gls$', '\.ist$', '\.log$', '\.out$', '\.xml$', '\.gz$', '\.latexmain$', '\.toc$', '\.xdv$', '\.tdn$', '\.tld$', '\.tlg', '\.bdn', '\.bld', '\.ldn', '\.lld', '\.llg', '\.ttf', '\.zip'] 
+ 
  
 " Map the Guillemet symbol
 " inoremap << «
 " inoremap >> »
+"
 " Map enter to open new line without leaving normal mode
 nnoremap <enter> o<esc>k
 " ---}}}
@@ -184,6 +186,7 @@ nnoremap <enter> o<esc>k
 if has('gui_running') 
     " Set the GUI font 
     set guifont=MesloLGM\ Nerd\ Font\ Mono
+
     " Optionally, open NERDTree on startup: 
     " au VimEnter * NERDTree 
  
