@@ -76,6 +76,7 @@ syntax on
  
 " Line numbering: absolute and relative toggle 
 set number 
+set relativenumber
 
 if has('autocmd') 
   augroup numbertoggle 
