@@ -16,7 +16,7 @@
 " ============================================================================== 
  
 " ------------------------------------------------------------------------------ 
-" PLUGINS (using vim-plug) 
+" PLUGINS (using vim-plug) ----------{{{ 
 " ------------------------------------------------------------------------------ 
 
 " Set up the plugin directory based on the operating system
@@ -65,9 +65,10 @@ Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
 
 call plug#end() 
+" ---}}}
  
 " ------------------------------------------------------------------------------ 
-" GENERAL SETTINGS 
+" GENERAL SETTINGS ----------{{{ 
 " ------------------------------------------------------------------------------ 
  
 " Enable syntax highlighting 
@@ -124,9 +125,10 @@ set expandtab
  
 " Increase command history size 
 set history=1000 
+" ---}}}
  
 " ------------------------------------------------------------------------------ 
-" KEY MAPPINGS 
+" KEY MAPPINGS ----------{{{ 
 " ------------------------------------------------------------------------------ 
  
 " Exit insert mode with <M-SPACE> or 'jk' 
@@ -174,9 +176,10 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " inoremap >> »
 " Map enter to open new line without leaving normal mode
 nnoremap <enter> o<esc>k
+" ---}}}
 
 " ------------------------------------------------------------------------------ 
-" GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) 
+" GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) ----------{{{ 
 " ------------------------------------------------------------------------------ 
 if has('gui_running') 
     " Set the GUI font 
@@ -208,9 +211,28 @@ set noerrorbells visualbell t_vb=
 if has('autocmd') 
   autocmd GUIEnter * set visualbell t_vb= 
 endif 
+
+function! Performance() " lets neovide run smoother
+    " Reduce cursor animation time  
+    let g:neovide_cursor_animation_length = 0  
+
+    " Disable cursor trail  
+    let g:neovide_cursor_trail_length = 0  
+
+    " Disable floating blur (if enabled)  
+    let g:neovide_floating_blur = 0  
+
+    " Lower refresh rate (default is 60)  
+    let g:neovide_refresh_rate = 30  
+
+    " Disable idle animation updates  
+    let g:neovide_no_idle = v:true  
+endfunction
+
+" ---}}}
  
 " ------------------------------------------------------------------------------ 
-" STATUS LINE CONFIGURATION 
+" STATUS LINE CONFIGURATION ----------{{{ 
 " ------------------------------------------------------------------------------ 
 set statusline= 
 set statusline+=%f              " File path 
@@ -224,9 +246,10 @@ set statusline+=:               " Separator for column
 set statusline+=%-2c            " Column number (padded) 
 set statusline+=\ %m            " Modified flag 
 set laststatus=2 
+" ---}}}
  
 " ------------------------------------------------------------------------------ 
-" LANGUAGE SPECIFIC FUNCTIONS AND MAPPINGS 
+" LANGUAGE SPECIFIC FUNCTIONS AND MAPPINGS----------{{{  
 " ------------------------------------------------------------------------------ 
  
 function! EngType() 
@@ -269,7 +292,9 @@ nnoremap <Leader>a :<C-U>call AraType()<CR>
 nnoremap <Leader>t :<C-U>call TranscriptType()<CR> 
 nnoremap <Leader>f :<C-U>call FontMeslo()<CR> 
  
+" ---}}}
 " ------------------------------------------------------------------------------ 
+"
 " FOLDING SETTINGS (if desired) 
 " ------------------------------------------------------------------------------ 
 " vim:foldmethod=marker:foldlevel=0
