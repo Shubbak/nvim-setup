@@ -51,52 +51,59 @@ else
 fi
 
 # Function to prompt user for TeX Live installation
-choose_texlive_option() {
-    while true; do
-        echo -e "\nChoose TeX Live installation:\n"
-        echo "  full  - Install texlive-full (~6GB, never worry about packages)"
-        echo "  small - Install a recommended TeX Live setup"
-        echo "  no    - Skip TeX Live installation"
-        read -p "Your choice: " choice
+    choose_texlive_option() {
+        while true; do
+            echo -e "\nChoose TeX Live installation:\n"
+            echo "  full  - Install texlive-full (~6GB, never worry about packages)"
+            echo "  small - Install a recommended TeX Live setup"
+            echo "  no    - Skip TeX Live installation"
+            read -p "Your choice: " choice
 
-        # Convert input to lowercase
-        choice=${choice,,}
+            # Convert input to lowercase
+            choice=${choice,,}
 
-        if [[ "$choice" == "full" ]]; then
-            echo "Installing full TeX Live..."
-            sudo apt update && sudo apt install -y texlive-full
-            echo "TeX Live installation complete!"
-            break
-        elif [[ "$choice" == "small" ]]; then
-            echo "Installing recommended TeX Live..."
-            sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex
-            echo "TeX Live installation complete!"
-            break
-        elif [[ "$choice" == "no" ]]; then
-            echo "Skipping TeX Live installation."
-            break
-        else
-            echo "Invalid choice. Please enter 'full', 'small', or 'no'."
-        fi
-    done
-}
+            if [[ "$choice" == "full" ]]; then
+                echo "Installing full TeX Live..."
+                sudo apt update && sudo apt install -y texlive-full
+                echo "TeX Live installation complete!"
+                break
+            elif [[ "$choice" == "small" ]]; then
+                echo "Installing recommended TeX Live..."
+                sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex
+                echo "TeX Live installation complete!"
+                break
+            elif [[ "$choice" == "no" ]]; then
+                echo "Skipping TeX Live installation."
+                break
+            else
+                echo "Invalid choice. Please enter 'full', 'small', or 'no'."
+            fi
+        done
+    }
 
 # Call the function
-choose_texlive_option
+if command -v tex >/dev/null 2>&1; then
+    echo "TeX Live is installed."
+else
+    choose_texlive_option
+fi
 
 # Prompt user for latexmk installation
-read -p "Do you want to install latexmk? (y/n): " choice
 
-# Convert input to lowercase to handle 'Y' or 'y'
-choice=${choice,,}
+if command -v latexmk >/dev/null 2>&1; then
+    read -p "Do you want to install latexmk? (y/n): " choice
 
-if [[ "$choice" == "y" ]]; then
-    echo "Installing latexmk..."
-    sudo apt update
-    sudo apt install -y latexmk
-    echo "latexmk installation complete!"
-else
-    echo "Skipping latexmk installation."
+    # Convert input to lowercase to handle 'Y' or 'y'
+    choice=${choice,,}
+
+    if [[ "$choice" == "y" ]]; then
+        echo "Installing latexmk..."
+        sudo apt update
+        sudo apt install -y latexmk
+        echo "latexmk installation complete!"
+    else
+        echo "Skipping latexmk installation."
+    fi
 fi
 
 # Install MesloLGM Nerd Font Mono if not installed
