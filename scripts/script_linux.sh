@@ -1,7 +1,12 @@
 #!/bin/bash
 
+
+command_exists() {
+  command -v "$1" &>/dev/null
+}
+
 # Install Snap if not installed
-if ! command -v snap &> /dev/null
+if ! command_exists snap 
 then
     echo "Snap is not installed. Installing Snap..."
     sudo apt update
@@ -10,18 +15,18 @@ fi
 
 # Install wget and unzip if not installed
 
-if ! command -v wget &> /dev/null; then
+if ! command_exists wget ; then
     echo "wget not found, installing..."
     sudo apt install -y wget
 fi
 
-if ! command -v unzip &> /dev/null; then
+if ! command_exists unzip ; then
     echo "unzip not found, installing..."
     sudo apt install -y unzip
 fi
 
 # Install nvim if not installed
-if ! command -v nvim &> /dev/null
+if ! command_exists nvim 
 then
     echo "Neovim is not installed. Installing Neovim..."
     sudo snap install nvim --classic
@@ -30,18 +35,34 @@ else
     echo "Neovim is already installed."
 fi
 
-# Install neovide if not installed
-if ! command -v neovide &> /dev/null
-then 
-    echo "Installing neovide..."
-    sudo snap install neovide --classic
-    echo "Neovide installed."
+# Check if neovide is installed
+if ! command_exists neovide; then
+  echo "Neovide is not installed."
+
+  # Check if rust is installed
+  if ! command_exists rustc; then
+    echo "Rust is not installed. Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source $HOME/.cargo/env
+    echo "Rust has been installed."
+  else
+    echo "Rust is already installed."
+  fi
+
+  # Install neovide using rust
+  echo "Installing Neovide..."
+  git clone https://github.com/neovide/neovide.git
+  cd neovide || exit
+  cargo build --release
+  sudo mv ./target/release/neovide /usr/local/bin/
+
+  echo "Neovide has been installed."
 else
-    echo "Neovide already installed."
+  echo "Neovide is already installed."
 fi
 
 # Install zathura if not installed
-if ! command -v zathura &> /dev/null
+if ! command_exists zathura 
 then 
     echo "Installing zathura..."
     sudo apt install -y zathura
