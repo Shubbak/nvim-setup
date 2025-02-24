@@ -44,6 +44,9 @@ else
 endif
 let g:vimtex_quickfix_mode = 0 
 let g:vimtex_complete_close_braces = 1 
+let g:vimtex_compiler_method = 'latexmk'
+nnoremap <leader>s :VimtexView<CR>
+
  
 Plug 'KeitaNakamura/tex-conceal.vim' 
 set conceallevel=1 
@@ -139,7 +142,7 @@ inoremap <M-i> <ESC>o\item<Space>
 nnoremap <M-i> o\item<Space> 
  
 " Set leader key to comma 
-let mapleader = "," 
+let mapleader=","
  
 " Map space to enter command mode 
 nnoremap <space> : 
@@ -181,7 +184,6 @@ let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$'
 nnoremap <enter> o<esc>k
 " ---}}}
 
-" ------------------------------------------------------------------------------ 
 " GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) ----------{{{ 
 " ------------------------------------------------------------------------------ 
 if has('gui_running') 
