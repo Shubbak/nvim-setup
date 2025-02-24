@@ -15,6 +15,9 @@
 " ~\AppData\Local\nvim\init.vim for Windows.
 " ============================================================================== 
  
+" Set leader key to comma 
+let mapleader=","
+
 " ------------------------------------------------------------------------------ 
 " PLUGINS (using vim-plug) ----------{{{ 
 " ------------------------------------------------------------------------------ 
@@ -45,7 +48,6 @@ endif
 let g:vimtex_quickfix_mode = 0 
 let g:vimtex_complete_close_braces = 1 
 let g:vimtex_compiler_method = 'latexmk'
-nnoremap <leader>s :VimtexView<CR>
 
  
 Plug 'KeitaNakamura/tex-conceal.vim' 
@@ -76,6 +78,10 @@ call plug#end()
  
 " Enable syntax highlighting 
 syntax on 
+
+" Enable modeline which means that a comment starting with vim: will override
+" settings per file
+set modeline
  
 " Line numbering: absolute and relative toggle 
 set number 
@@ -141,8 +147,6 @@ inoremap jk <ESC>
 inoremap <M-i> <ESC>o\item<Space> 
 nnoremap <M-i> o\item<Space> 
  
-" Set leader key to comma 
-let mapleader=","
  
 " Map space to enter command mode 
 nnoremap <space> : 
@@ -155,8 +159,10 @@ nnoremap N Nzz
 nnoremap Y y$ 
  
 " Map F5 to run the current Python script (saves, clears terminal, executes) 
-nnoremap <F5> :w<CR>:!clear<CR>:!python %<CR> 
+" nnoremap <F5> :w<CR>:!clear<CR>:!python %<CR> 
+nnoremap <F5> :w<CR>:!gnome-terminal -- bash -c "python3 %; exec bash"<CR>
  
+
 " Window splitting and navigation 
 nnoremap <C-j> <C-w>j 
 nnoremap <C-k> <C-w>k 
@@ -182,6 +188,9 @@ let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$'
 "
 " Map enter to open new line without leaving normal mode
 nnoremap <enter> o<esc>k
+
+nnoremap <leader>s :VimtexView<CR>
+
 " ---}}}
 
 " GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) ----------{{{ 
@@ -301,10 +310,27 @@ nnoremap <Leader>f :<C-U>call FontMeslo()<CR>
 " ---}}}
 " ------------------------------------------------------------------------------ 
 "
-" FOLDING SETTINGS (if desired) 
-" ------------------------------------------------------------------------------ 
-" vim:foldmethod=marker:foldlevel=0
+" FOLDING SETTINGS  ----------{{{
+
+" Set default foldmethod to 'syntax' (can be 'indent' or 'manual')
+set foldmethod=syntax
+set foldlevel=1
+
+" Automatically set folding for specific file types
+augroup filetype_folding
+  autocmd!
+  
+  " Enable folding for Python files based on indentation 
+  autocmd FileType python setlocal foldmethod=indent 
+  "
+  " Enable folding for Tex files based on markers 
+  autocmd FileType tex setlocal foldmethod=marker 
+
+augroup END
+"---}}}
 "
+"
+" vim:set fdm=marker fdl=0:
 "
 "
 "
