@@ -69,6 +69,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
 
+" Python 
+" Plug 'danielgronau/vim-ipython-cell'
+Plug 'kassio/neoterm'  " add terminal window in nvim
+
 call plug#end() 
 " ---}}}
  
