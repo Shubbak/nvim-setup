@@ -35,30 +35,38 @@ else
     echo "Neovim is already installed."
 fi
 
-# Check if neovide is installed
-if ! command_exists neovide; then
-  echo "Neovide is not installed."
+read -p "Do you want to install neovide? (y/n)" choice
 
-  # Check if rust is installed
-  if ! command_exists rustc; then
-    echo "Rust is not installed. Installing Rust..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    source $HOME/.cargo/env
-    echo "Rust has been installed."
-  else
-    echo "Rust is already installed."
-  fi
+# Convert input to lowercase
+choice=${choice,,}
 
-  # Install neovide using rust
-  echo "Installing Neovide..."
-  git clone https://github.com/neovide/neovide.git
-  cd neovide || exit
-  cargo build --release
-  sudo mv ./target/release/neovide /usr/local/bin/
+if [[ "$choice" == "y" ]]; then
 
-  echo "Neovide has been installed."
-else
-  echo "Neovide is already installed."
+    # Check if neovide is installed
+    if ! command_exists neovide; then
+      echo "Neovide is not installed."
+
+      # Check if rust is installed
+      if ! command_exists rustc; then
+        echo "Rust is not installed. Installing Rust..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        source $HOME/.cargo/env
+        echo "Rust has been installed."
+      else
+        echo "Rust is already installed."
+      fi
+
+      # Install neovide using rust
+      echo "Installing Neovide..."
+      git clone https://github.com/neovide/neovide.git
+      cd neovide || exit
+      cargo build --release
+      sudo mv ./target/release/neovide /usr/local/bin/
+
+      echo "Neovide has been installed."
+    else
+      echo "Neovide is already installed."
+    fi
 fi
 
 # Install zathura if not installed
@@ -90,7 +98,7 @@ fi
                 break
             elif [[ "$choice" == "small" ]]; then
                 echo "Installing recommended TeX Live..."
-                sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex
+                sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex texlive-science
                 echo "TeX Live installation complete!"
                 break
             elif [[ "$choice" == "no" ]]; then
