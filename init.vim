@@ -41,7 +41,9 @@ Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex' 
 " For Ubuntu, we typically use zathura as the PDF viewer: 
 if has('win32') || has('win64')
-  let g:vimtex_view_method = 'general' 
+  let g:vimtex_view_general_viewer = 'SumatraPDF'
+  let g:vimtex_view_general_options
+      \ = '-reuse-instance -forward-search @tex @line @pdf'
 else
     let g:vimtex_view_method = 'zathura'
 endif
