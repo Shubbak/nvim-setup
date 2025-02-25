@@ -7,6 +7,45 @@ if (-not (Get-Command "winget.exe" -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
+# --- Check if Python is installed ---
+$pythonInstalled = winget list --id Python.Python -e | Out-String
+
+if ($pythonInstalled -match "Python.Python") {
+    Write-Host "Python is already installed."
+} else {
+    Write-Host "Python is not installed. Installing Python..."
+    winget install --id Python.Python --exact --silent
+    Write-Host "Python installation complete!"
+}
+
+# --- Check if pip is installed ---
+# We will check if pip is available by running "python -m pip --version"
+$pipInstalled = python -m pip --version 2>&1
+
+if ($pipInstalled -match "pip") {
+    Write-Host "pip is already installed."
+} else {
+    Write-Host "pip is not installed. Installing pip..."
+    
+    # Install pip using ensurepip (Python 3.4+ includes this method)
+    python -m ensurepip --upgrade
+    Write-Host "pip installation complete!"
+}
+
+# --- Check if the Neovim Python package is installed ---
+# We will check if the 'neovim' package is installed by running "pip show neovim"
+$neovimInstalled = python -m pip show neovim 2>&1
+
+if ($neovimInstalled -match "Name: neovim") {
+    Write-Host "Neovim Python package is already installed."
+} else {
+    Write-Host "Neovim Python package is not installed. Installing..."
+    
+    # Install the Neovim Python package
+    python -m pip install neovim
+    Write-Host "Neovim Python package installation complete!"
+}
+
 # --- Install Neovim ---
 $nvimInstalled = winget list --id Neovim.Neovim -e | Out-String
 if ($nvimInstalled -notmatch "Neovim") {
