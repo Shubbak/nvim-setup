@@ -66,7 +66,7 @@ else
     let &t_EI = "\e[2 q" 
 endif 
  
-colorscheme gruvbox 
+colorscheme one 
 set background=dark 
 
 " Disable error and visual bells 
