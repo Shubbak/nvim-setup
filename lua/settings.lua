@@ -38,8 +38,8 @@ vim.o.showmode = true
 vim.o.showmatch = true
 
 -- Disable persistent undo and backup files
-vim.o.noundofile = true
-vim.o.nobackup = true
+vim.o.undofile = false
+vim.o.backup = false
 
 -- Scrolling and wrapping
 vim.o.scrolloff = 7
