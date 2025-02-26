@@ -19,62 +19,7 @@
 let mapleader=","
 
 " ------------------------------------------------------------------------------ 
-" PLUGINS (using vim-plug) ----------{{{ 
-" ------------------------------------------------------------------------------ 
-
-" Set up the plugin directory based on the operating system
-if has('win32') || has('win64')
-    " For Windows, use the LOCALAPPDATA environment variable
-    let s:plug_dir = expand($LOCALAPPDATA . '\nvim\plugged')
-else
-    " For Linux (and other Unix-like systems), use the standard config path
-    let s:plug_dir = expand('~/.config/nvim/plugged')
-endif
-
-call plug#begin(s:plug_dir) 
- 
-" NERDTree for file browsing 
-Plug 'preservim/nerdtree' 
- 
-" LaTeX support via vimtex and tex-conceal 
-Plug 'lervag/vimtex' 
-let g:tex_flavor = 'latex' 
-" For Ubuntu, we typically use zathura as the PDF viewer: 
-if has('win32') || has('win64')
-  let g:vimtex_view_method = 'general' 
-else
-    let g:vimtex_view_method = 'zathura'
-endif
-let g:vimtex_quickfix_mode = 0 
-let g:vimtex_complete_close_braces = 1 
-let g:vimtex_compiler_method = 'latexmk'
-
- 
-Plug 'KeitaNakamura/tex-conceal.vim' 
-set conceallevel=1 
-let g:tex_conceal = 'abdmg' 
-hi Conceal ctermbg=none 
- 
-" Snippets with UltiSnips 
-Plug 'sirver/ultisnips' 
-let g:UltiSnipsExpandTrigger = '<tab>' 
-let g:UltiSnipsJumpForwardTrigger = '<tab>' 
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' 
-
-Plug 'honza/vim-snippets'
- 
-" Git integration with vim-fugitive 
-Plug 'tpope/vim-fugitive' 
-
-Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
-
-" Python 
-" Plug 'danielgronau/vim-ipython-cell'
-Plug 'kassio/neoterm'  " add terminal window in nvim
-
-call plug#end() 
-" ---}}}
+luafile ~/.config/nvim/lua/plugins.lua
  
 " ------------------------------------------------------------------------------ 
 " GENERAL SETTINGS ----------{{{ 
@@ -222,7 +167,7 @@ else
     let &t_EI = "\e[2 q" 
 endif 
  
-colorscheme gruvbox 
+colorscheme one 
 set background=dark 
 
 " Disable error and visual bells 
@@ -335,6 +280,4 @@ augroup END
 "
 "
 " vim:set fdm=marker fdl=0:
-"
-"
-"
+
