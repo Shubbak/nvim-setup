@@ -20,10 +20,10 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- vim.keymap.set("n", "<F5>", ":w<CR>:!clear<CR>:!python %<CR>", { noremap = true })
 if vim.fn.has("wsl") == 1 then
   -- WSL environment (assuming you want to use a WSL-compatible terminal)
-  vim.keymap.set("n", "<F5>", ":w<CR>:!wsl python3 %<CR>", { noremap = true })
+      vim.keymap.set("n", "<F5>", ":w<CR>:!wsl bash -i -c 'python3 %; echo Press any key to exit...; read -n 1 -s'<CR>", { noremap = true })
 elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
   -- Windows environment
-  vim.keymap.set("n", "<F5>", ":w<CR>:!start cmd.exe /c python %<CR>", { noremap = true })
+      vim.keymap.set("n", "<F5>", ":w<CR>:!start cmd /c 'python % && pause'<CR>", { noremap = true })
 else
   -- Linux environment (Ubuntu, etc.)
   vim.keymap.set("n", "<F5>", ":w<CR>:!gnome-terminal -- bash -c 'python3 %; exec bash'<CR>", { noremap = true })
