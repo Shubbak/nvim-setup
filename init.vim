@@ -26,125 +26,20 @@ else
 endif
  
 " ------------------------------------------------------------------------------ 
-" GENERAL SETTINGS ----------{{{ 
-" ------------------------------------------------------------------------------ 
- 
-" Enable syntax highlighting 
-syntax on 
-
-" Enable modeline which means that a comment starting with vim: will override
-" settings per file
-set modeline
- 
-" Line numbering: absolute and relative toggle 
-set number 
-set relativenumber
-
-if has('autocmd') 
-  augroup numbertoggle 
-    autocmd! 
-    " When entering insert mode, disable relative numbers
-    autocmd InsertEnter * set norelativenumber
-    " When leaving insert mode, enable relative numbers
-    autocmd InsertLeave * set relativenumber
-  augroup END 
-else 
-  set rnu 
-endif 
- 
-" Disable swap files 
-set noswapfile 
- 
-" Search settings 
-set hlsearch 
-set ignorecase 
-set smartcase 
-set incsearch 
-set showcmd 
-set showmode 
-set showmatch 
- 
-" Disable persistent undo and backup files 
-set noundofile 
-set nobackup 
- 
-" Scrolling and wrapping 
-set scrolloff=7 
-set nowrap 
- 
-" File type detection and plugins 
-set nocompatible 
-filetype on 
-filetype plugin on 
-filetype indent on 
- 
-" Highlight the current line 
-set cursorline 
- 
-" Indentation settings 
-set shiftwidth=4 
-set tabstop=4 
-set expandtab 
- 
-" Increase command history size 
-set history=1000 
-" ---}}}
+if has('win32') || has('win64')
+    luafile ~\AppData\Local\nvim\lua\settings.lua
+else
+    luafile ~/.config/nvim/lua/settings.lua
+endif
  
 " ------------------------------------------------------------------------------ 
-" KEY MAPPINGS ----------{{{ 
-" ------------------------------------------------------------------------------ 
- 
-" Exit insert mode with <M-SPACE> or 'jk' 
-" inoremap <M-SPACE> <ESC>
-inoremap jk <ESC>
-inoremap <M-i> <ESC>o\item<Space> 
-nnoremap <M-i> o\item<Space> 
- 
- 
-" Map space to enter command mode 
-nnoremap <space> : 
- 
-" Center search results after moving with n/N 
-nnoremap n nzz 
-nnoremap N Nzz 
- 
-" Yank to the end of the line with Y 
-nnoremap Y y$ 
- 
-" Map F5 to run the current Python script (saves, clears terminal, executes) 
-" nnoremap <F5> :w<CR>:!clear<CR>:!python %<CR> 
-nnoremap <F5> :w<CR>:!gnome-terminal -- bash -c "python3 %; exec bash"<CR>
- 
+if has('win32') || has('win64')
+    luafile ~\AppData\Local\nvim\lua\keymaps.lua
+else
+    luafile ~/.config/nvim/lua/keymaps.lua
+endif
 
-" Window splitting and navigation 
-nnoremap <C-j> <C-w>j 
-nnoremap <C-k> <C-w>k 
-nnoremap <C-h> <C-w>h 
-nnoremap <C-l> <C-w>l 
- 
-" Resize split windows with arrow keys 
-nnoremap <C-Up>    <C-w>+ 
-nnoremap <C-Down>  <C-w>- 
-nnoremap <C-Left>  <C-w>< 
-nnoremap <C-Right> <C-w>> 
- 
-" Toggle NERDTree with leader+nt 
-nnoremap <leader>nt :NERDTreeToggle<CR> 
- 
-" Set files/directories to ignore in NERDTree 
-let NERDTreeIgnore = ['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$', '\.aux$', '\.bbl$', '\.bcf$', '\.blg$', '\.fdb_latexmk$', '\.fls$', '\.glg$', '\.glo$', '\.gls$', '\.ist$', '\.log$', '\.out$', '\.xml$', '\.gz$', '\.latexmain$', '\.toc$', '\.xdv$', '\.tdn$', '\.tld$', '\.tlg', '\.bdn', '\.bld', '\.ldn', '\.lld', '\.llg', '\.ttf', '\.zip'] 
- 
- 
-" Map the Guillemet symbol
-" inoremap << «
-" inoremap >> »
-"
-" Map enter to open new line without leaving normal mode
-nnoremap <enter> o<esc>k
 
-nnoremap <leader>s :VimtexView<CR>
-
-" ---}}}
 
 " GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) ----------{{{ 
 " ------------------------------------------------------------------------------ 

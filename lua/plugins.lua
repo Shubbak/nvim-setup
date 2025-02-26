@@ -36,6 +36,15 @@ require("lazy").setup({
                     }
                 },
             })
+            filters = {
+            custom = {
+              '\\.git$', '\\.jpg$', '\\.mp4$', '\\.ogg$', '\\.iso$', '\\.pdf$', '\\.pyc$', '\\.odt$', 
+              '\\.png$', '\\.gif$', '\\.db$', '\\.aux$', '\\.bbl$', '\\.bcf$', '\\.blg$', '\\.fdb_latexmk$', 
+              '\\.fls$', '\\.glg$', '\\.glo$', '\\.gls$', '\\.ist$', '\\.log$', '\\.out$', '\\.xml$', 
+              '\\.gz$', '\\.latexmain$', '\\.toc$', '\\.xdv$', '\\.tdn$', '\\.tld$', '\\.tlg$', '\\.bdn$', 
+              '\\.bld$', '\\.ldn$', '\\.lld$', '\\.llg$', '\\.ttf$', '\\.zip'
+            }
+          }
         end
     },
 
