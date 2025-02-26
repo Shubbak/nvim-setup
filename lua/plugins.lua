@@ -68,11 +68,12 @@ require("lazy").setup({
     -- LaTeX support via vimtex
     {
         "lervag/vimtex",
-        init = function()
+        config = function()
             -- Set LaTeX flavor
             vim.g.tex_flavor = "latex"
             
             -- For Windows, use SumatraPDF, otherwise use Zathura
+            local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             if is_windows then
                 vim.g.vimtex_view_general_viewer = "SumatraPDF"
                 vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
