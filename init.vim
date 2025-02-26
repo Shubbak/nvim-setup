@@ -19,7 +19,11 @@
 let mapleader=","
 
 " ------------------------------------------------------------------------------ 
-luafile ~/.config/nvim/lua/plugins.lua
+if has('win32') || has('win64')
+    luafile ~\AppData\Local\nvim\lua\plugins.lua
+else
+    luafile ~/.config/nvim/lua/plugins.lua
+endif
  
 " ------------------------------------------------------------------------------ 
 " GENERAL SETTINGS ----------{{{ 

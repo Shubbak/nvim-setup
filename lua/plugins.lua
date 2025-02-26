@@ -1,8 +1,14 @@
 -- Set up plugin directory based on OS
 local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 
+
 -- Ensure lazy.nvim is installed
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath 
+if is_windows then
+    lazypath = vim.fn.stdpath("data") .. "\\lazy\\lazy.nvim"
+else
+    lazypath = vim.fn.stdpath("data") .. "lazy/lazy.nvim"
+end
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git", "clone", "--filter=blob:none",
@@ -22,7 +28,7 @@ require("lazy").setup({
                 view = {
                     width = 30,                 -- Set the width of the tree
                     side = 'left',              -- Position the tree on the left
-                    auto_resize = true,         -- Automatically resize when window size changes
+                    -- auto_resize = true,         -- Automatically resize when window size changes
                 },
                 renderer = {
                     icons = {
@@ -41,7 +47,6 @@ require("lazy").setup({
             vim.g.tex_flavor = "latex"
             
             -- For Windows, use SumatraPDF, otherwise use Zathura
-            local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             if is_windows then
                 vim.g.vimtex_view_general_viewer = "SumatraPDF"
                 vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
