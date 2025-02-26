@@ -48,6 +48,23 @@ require("lazy").setup({
         end
     },
 
+    -- LSP for autocompletion, go-to-definition, linting and more
+    {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require'lspconfig'.pyright.setup{}
+    end
+    },
+
+    { 'nvim-treesitter/nvim-treesitter', config = function()
+      require'nvim-treesitter.configs'.setup {
+        -- ensure_installed = "maintained",
+        highlight = { enable = true },
+      }
+    end
+    },
+
+
     -- LaTeX support via vimtex
     {
         "lervag/vimtex",
@@ -88,6 +105,8 @@ require("lazy").setup({
             require("luasnip.loaders.from_vscode").lazy_load()
         end
     },
+
+    { 'github/copilot.vim' },
 
     -- Git integration with vim-fugitive
     { "tpope/vim-fugitive" },

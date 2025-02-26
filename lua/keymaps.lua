@@ -16,6 +16,9 @@ vim.keymap.set("n", "N", "Nzz", { noremap = true })
 -- Yank to the end of the line with Y
 vim.keymap.set("n", "Y", "y$", { noremap = true })
 
+-- <leader>d opend vim-tree
+vim.keymap.set("n", "<leader>d", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+
 -- Map F5 to run the current Python script (saves, clears terminal, executes)
 -- vim.keymap.set("n", "<F5>", ":w<CR>:!clear<CR>:!python %<CR>", { noremap = true })
 if vim.fn.has("wsl") == 1 then
