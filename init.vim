@@ -18,98 +18,12 @@
 " Set leader key to comma 
 let mapleader=","
 
-" ------------------------------------------------------------------------------ 
 if has('win32') || has('win64')
-    luafile ~\AppData\Local\nvim\lua\plugins.lua
+    luafile ~\AppData\Local\nvim\lua_settings.lua
 else
-    luafile ~/.config/nvim/lua/plugins.lua
+    luafile ~/.config/nvim/lua_settings.lua
 endif
  
-" ------------------------------------------------------------------------------ 
-if has('win32') || has('win64')
-    luafile ~\AppData\Local\nvim\lua\settings.lua
-else
-    luafile ~/.config/nvim/lua/settings.lua
-endif
- 
-" ------------------------------------------------------------------------------ 
-if has('win32') || has('win64')
-    luafile ~\AppData\Local\nvim\lua\keymaps.lua
-else
-    luafile ~/.config/nvim/lua/keymaps.lua
-endif
-
-
-
-" GUI SPECIFIC SETTINGS (if using a GUI client for Neovim) ----------{{{ 
-" ------------------------------------------------------------------------------ 
-if has('gui_running') 
-    " Set the GUI font 
-    set guifont=MesloLGM\ Nerd\ Font\ Mono
-
-    " Optionally, open NERDTree on startup: 
-    " au VimEnter * NERDTree 
- 
-    " Enable German spell checking 
-    set spell spelllang=de 
- 
-    " Use a preferred colorscheme for GUI 
-    " colorscheme one 
-    " set background=dark 
-else 
-    " For terminal Neovim, use a different colorscheme 
-    " colorscheme gruvbox 
-    " set background=dark 
-
-    " Set terminal cursor shape settings 
-    let &t_SI = "\e[5 q" 
-    let &t_EI = "\e[2 q" 
-endif 
- 
-colorscheme one 
-set background=dark 
-
-" Disable error and visual bells 
-set noerrorbells visualbell t_vb= 
-if has('autocmd') 
-  autocmd GUIEnter * set visualbell t_vb= 
-endif 
-
-function! Performance() " lets neovide run smoother
-    " Reduce cursor animation time  
-    let g:neovide_cursor_animation_length = 0  
-
-    " Disable cursor trail  
-    let g:neovide_cursor_trail_length = 0  
-
-    " Disable floating blur (if enabled)  
-    let g:neovide_floating_blur = 0  
-
-    " Lower refresh rate (default is 60)  
-    let g:neovide_refresh_rate = 30  
-
-    " Disable idle animation updates  
-    let g:neovide_no_idle = v:true  
-endfunction
-
-" ---}}}
- 
-" ------------------------------------------------------------------------------ 
-" STATUS LINE CONFIGURATION ----------{{{ 
-" ------------------------------------------------------------------------------ 
-set statusline= 
-set statusline+=%f              " File path 
-set statusline+=\ %Y            " File type 
-set statusline+=%=              " Separator between left and right 
-set statusline+=ascii:\ %b     " ASCII code of character under cursor 
-set statusline+=\ hex:\ 0x%B   " Hex code of character under cursor 
-set statusline+=\ %p%%          " Percentage through file 
-set statusline+=\ %04l          " Zero-padded line number 
-set statusline+=:               " Separator for column 
-set statusline+=%-2c            " Column number (padded) 
-set statusline+=\ %m            " Modified flag 
-set laststatus=2 
-" ---}}}
  
 " ------------------------------------------------------------------------------ 
 " LANGUAGE SPECIFIC FUNCTIONS AND MAPPINGS----------{{{  

@@ -1,8 +1,6 @@
 -- Enable syntax highlighting
 vim.cmd("syntax on")
 
--- Enable modeline which means that a comment starting with vim: will override settings per file
-vim.o.modeline = true
 
 -- Line numbering: absolute and relative toggle
 vim.wo.number = true
@@ -37,6 +35,9 @@ vim.o.showcmd = true
 vim.o.showmode = true
 vim.o.showmatch = true
 
+-- Enable modeline which means that a comment starting with vim: will override settings per file
+vim.o.modeline = true
+
 -- Disable persistent undo and backup files
 vim.o.undofile = false
 vim.o.backup = false
@@ -61,3 +62,49 @@ vim.o.expandtab = true
 
 -- Increase command history size
 vim.o.history = 1000
+
+
+-- Enable spell checking for German
+vim.opt.spell = true
+vim.opt.spelllang = "de"
+
+-- Detect if Neovim is running in a GUI
+if vim.g.neovide then
+    -- Set the GUI font
+    vim.opt.guifont = "MesloLGM Nerd Font Mono"
+else
+    -- Set terminal cursor shape settings
+    -- vim.opt.t_SI = "\27[5 q"  -- Insert mode cursor
+    -- vim.opt.t_EI = "\27[2 q"  -- Normal mode cursor
+end
+
+-- Set colorscheme and background
+vim.cmd("colorscheme one")
+vim.opt.background = "dark"
+
+-- Disable error and visual bells
+vim.opt.errorbells = false
+vim.opt.visualbell = false
+
+-- Function to optimize performance for Neovide
+local function performance()
+    -- Reduce cursor animation time
+    vim.g.neovide_cursor_animation_length = 0
+
+    -- Disable cursor trail
+    vim.g.neovide_cursor_trail_length = 0
+
+    -- Disable floating blur (if enabled)
+    vim.g.neovide_floating_blur = 0
+
+    -- Lower refresh rate (default is 60)
+    vim.g.neovide_refresh_rate = 30
+
+    -- Disable idle animation updates
+    vim.g.neovide_no_idle = true
+end
+
+-- Run performance optimizations if in Neovide
+if vim.g.neovide then
+    performance()
+end

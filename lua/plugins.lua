@@ -1,6 +1,17 @@
 -- Set up plugin directory based on OS
 local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
+-- Function to get Unicode code of character under cursor
 
+-- local function get_unicode()
+    -- local char = vim.fn.getcharstr()
+    -- return "Hex: 0x" .. string.format("%X", vim.fn.char2nr(char)) -- Get Hex of the character
+-- end
+-- Function to get Hex code of character under cursor
+local function get_hex()
+    -- Get the character under the cursor (without blocking)
+    local char = vim.fn.matchstr(vim.fn.getline('.'), '\\%'..vim.fn.col('.')..'c')
+    return "Hex: 0x" .. string.format("%X", vim.fn.char2nr(char)) -- Get Hex of the character
+end
 
 -- Ensure lazy.nvim is installed
 local lazypath 
@@ -47,7 +58,39 @@ require("lazy").setup({
           }
         end
     },
+ 
 
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end
+    },
+    
+    -- Statusline
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "auto",
+                    section_separators = { left = "", right = "" },
+                    component_separators = { left = "", right = "" },
+                    disabled_filetypes = { "NvimTree", "packer" },
+                },
+                sections = {
+                    lualine_b = { "branch", "diff" },
+                    lualine_c = { "filename" },
+                    lualine_x = {get_hex, "encoding", "fileformat", "filetype" },
+                    -- lualine_x = {"encoding", "fileformat", "filetype" },
+                    lualine_y = { "progress", "location" },
+                    lualine_z = { "%m" },
+                },
+            })
+        end
+    },
+   
     -- LaTeX support via vimtex
     {
         "lervag/vimtex",
