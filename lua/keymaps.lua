@@ -18,16 +18,18 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 
 -- Map F5 to run the current Python script (saves, clears terminal, executes)
 -- vim.keymap.set("n", "<F5>", ":w<CR>:!clear<CR>:!python %<CR>", { noremap = true })
-if vim.fn.has("wsl") == 1 then
-  -- WSL environment (assuming you want to use a WSL-compatible terminal)
-      vim.keymap.set("n", "<F5>", ":w<CR>:!wsl bash -i -c 'python3 %; echo Press any key to exit...; read -n 1 -s'<CR>", { noremap = true })
-elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-  -- Windows environment
-      vim.keymap.set("n", "<F5>", ":w<CR>:!start cmd /c 'python % && pause'<CR>", { noremap = true })
-else
-  -- Linux environment (Ubuntu, etc.)
-  vim.keymap.set("n", "<F5>", ":w<CR>:!gnome-terminal -- bash -c 'python3 %; exec bash'<CR>", { noremap = true })
-end
+-- if vim.fn.has("wsl") == 1 then
+    -- WSL environment (assuming you want to use a WSL-compatible terminal)
+    -- vim.keymap.set("n", "<F5>", ":w<CR>:!wsl bash -i -c 'python3 %; echo Press any key to exit...; read -n 1 -s'<CR>", { noremap = true })
+-- elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    -- Windows environment
+    -- vim.keymap.set("n", "<F5>", ":w<CR>:!start cmd /c 'python % && pause'<CR>", { noremap = true })
+-- else
+    -- Linux environment (Ubuntu, etc.)
+    -- vim.keymap.set("n", "<F5>", ":w<CR>:!gnome-terminal -- bash -c 'python3 %; exec bash'<CR>", { noremap = true })
+-- end
+
+vim.keymap.set("n", "<F5>", ":w<CR>:terminal python3 %<CR>", {noremap = true})
 
 -- Window splitting and navigation
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
