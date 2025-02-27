@@ -64,9 +64,6 @@ vim.o.expandtab = true
 vim.o.history = 1000
 
 
--- Enable spell checking for German
-vim.opt.spell = true
-vim.opt.spelllang = "de"
 
 -- Detect if Neovim is running in a GUI
 if vim.g.neovide then
