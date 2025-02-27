@@ -132,10 +132,7 @@ require("lazy").setup({
         end
     },
 
-    -- Git integration with vim-fugitive
-    { "tpope/vim-fugitive" },
-
-    -- Colorschemes
+-- Colorschemes
     { "morhetz/gruvbox" },
     { "rakr/vim-one" }
 })
