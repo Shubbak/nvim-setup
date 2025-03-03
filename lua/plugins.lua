@@ -124,11 +124,19 @@ require("lazy").setup({
     },
 
     -- Snippets (UltiSnips alternative: LuaSnip)
+    -- {
+        -- "L3MON4D3/LuaSnip",
+        -- dependencies = { "rafamadriz/friendly-snippets" },
+        -- config = function()
+            -- require("luasnip.loaders.from_vscode").lazy_load()
+        -- end
+    -- },
     {
-        "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        "sirver/ultisnips",
         config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
+          vim.g.UltiSnipsExpandTrigger = "<tab>"
+          vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
+          vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
         end
     },
 
