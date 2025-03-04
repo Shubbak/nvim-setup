@@ -34,6 +34,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
         {
             "nvim-tree/nvim-tree.lua",
             dependencies = { "nvim-tree/nvim-web-devicons" },
+            keys = {"<leader>nt"},
             config = function()
                 require("nvim-tree").setup({
                     view = {
@@ -83,10 +84,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
                 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
             end,
-        },
-
-        {
-            "rcarriga/nvim-notify"
+            ft = {"python"}
         },
 
         {
@@ -102,15 +100,15 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                 require("pomo").setup({
                     sessions = {
                         pomodoro = {
-                          { name = "Work", duration = "25m" },
-                          { name = "Short Break", duration = "5m" },
-                          { name = "Work", duration = "25m" },
-                          { name = "Short Break", duration = "5m" },
-                          { name = "Work", duration = "25m" },
-                          { name = "Long Break", duration = "15m" }
+                            { name = "Work", duration = "25m" },
+                            { name = "Short Break", duration = "5m" },
+                            { name = "Work", duration = "25m" },
+                            { name = "Short Break", duration = "5m" },
+                            { name = "Work", duration = "25m" },
+                            { name = "Long Break", duration = "15m" }
+                        }
                     }
-                }
-	})
+                })
             end
         },
 
@@ -159,6 +157,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
         -- LaTeX support via vimtex
         {
             "lervag/vimtex",
+            ft = "tex",
             init = function()
                 -- Set LaTeX flavor
                 vim.g.tex_flavor = "latex"
@@ -181,6 +180,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
         -- Conceal support for LaTeX
         {
             "KeitaNakamura/tex-conceal.vim",
+            ft = "tex",
             config = function()
                 vim.opt.conceallevel = 1
                 vim.g.tex_conceal = "abdmg"
@@ -188,124 +188,111 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             end
         },
 
-        -- Snippets (UltiSnips alternative: LuaSnip)
-        -- {
-            -- "L3MON4D3/LuaSnip",
-            -- dependencies = { "rafamadriz/friendly-snippets" },
-            -- config = function()
-                -- require("luasnip.loaders.from_vscode").lazy_load()
-                -- end
-                -- },
-                {
-                    "sirver/ultisnips",
-                    config = function()
-                        vim.g.UltiSnipsExpandTrigger = "<tab>"
-                        vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
-                        vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-                        vim.g.UltiSnipsSnippetDirectories = {vim.fn.getcwd() .. "/snippets", "UltiSnips"}
-                    end
-                },
+        {
+            "sirver/ultisnips",
+            dependencies = {'honza/vim-snippets'},
+            config = function()
+                vim.g.UltiSnipsExpandTrigger = "<tab>"
+                vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
+                vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+                vim.g.UltiSnipsSnippetDirectories = {vim.fn.getcwd() .. "/snippets", "UltiSnips"}
+            end
+        },
 
-                {
-                    'ellisonleao/glow.nvim',
-                    config = function()
-                        require('glow').setup()
+        {
+            'ellisonleao/glow.nvim',
+            config = function()
+                require('glow').setup()
+            end,
+            ft = 'markdown'
+        },
+
+        {
+            "epwalsh/obsidian.nvim",
+            ft = "markdown",
+            dependencies = {
+                "nvim-lua/plenary.nvim",        
+                "hrsh7th/nvim-cmp",
+                'mzlogin/vim-markdown-toc',
+                "nvim-telescope/telescope.nvim"
+            },
+            config = function()
+                require("obsidian").setup({
+                    workspaces = {
+                        {
+                            name = "Books",
+                            path = "~/Documents/Obsidian"
+
+                        }
+                    },
+                    completion = {
+                        nvim_cmp = true,
+                        min_chars = 2,
+                    },
+                    -- daily_notes = {
+                        -- -- Optional, if you keep daily notes in a separate directory.
+                        -- folder = "notes/dailies",
+                        -- -- Optional, if you want to change the date format for the ID of daily notes.
+                        -- date_format = "%Y-%m-%d",
+                        -- -- Optional, if you want to change the date format of the default alias of daily notes.
+                        -- alias_format = "%B %-d, %Y",
+                        -- -- Optional, default tags to add to each new daily note created.
+                        -- default_tags = { "daily-notes" },
+                        -- -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+                        -- template = nil
+                        -- },
+                        mappings = {
+                            -- Toggle check-boxes.
+                            ["<leader>ch"] = {
+                                action = function()
+                                    return require("obsidian").util.toggle_checkbox()
+                                end,
+                                -- opts = { buffer = true },
+                            },
+                        },
+                        -- templates = {
+                            -- folder = "my-templates-folder",
+                            -- date_format = "%Y-%m-%d-%a",
+                            -- time_format = "%H:%M",
+                            -- },
+                        })
                     end,
                 },
 
                 {
-                    "epwalsh/obsidian.nvim",
+                    "hrsh7th/nvim-cmp",
                     dependencies = {
-                        "nvim-lua/plenary.nvim",        
-                        "hrsh7th/nvim-cmp",
-                        'mzlogin/vim-markdown-toc',
-                        "nvim-telescope/telescope.nvim"
+                        "hrsh7th/cmp-nvim-lsp",
+                        "hrsh7th/cmp-buffer",
+                        "hrsh7th/cmp-path",
+                        "hrsh7th/cmp-cmdline",
                     },
                     config = function()
-                        require("obsidian").setup({
-                            workspaces = {
-                                {
-                                    name = "Books",
-                                    path = "~/Documents/Obsidian"
-
-                                }
+                        local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
+                        cmp.setup({
+                            mapping = {
+                                ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                                -- Weitere Mappings, z.B. für Tab:
+                                ["<Tab>"] = cmp.mapping(function(fallback)
+                                    if cmp.visible() then
+                                        cmp.select_next_item()
+                                    else
+                                        fallback()
+                                    end
+                                end, { "i", "s" }),
                             },
-                            completion = {
-                                nvim_cmp = true,
-                                min_chars = 2,
-                            },
-                            -- daily_notes = {
-                                -- -- Optional, if you keep daily notes in a separate directory.
-                                -- folder = "notes/dailies",
-                                -- -- Optional, if you want to change the date format for the ID of daily notes.
-                                -- date_format = "%Y-%m-%d",
-                                -- -- Optional, if you want to change the date format of the default alias of daily notes.
-                                -- alias_format = "%B %-d, %Y",
-                                -- -- Optional, default tags to add to each new daily note created.
-                                -- default_tags = { "daily-notes" },
-                                -- -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-                                -- template = nil
-                            -- },
-                            mappings = {
-                                -- Toggle check-boxes.
-                                ["<leader>ch"] = {
-                                    action = function()
-                                        return require("obsidian").util.toggle_checkbox()
-                                    end,
-                                    -- opts = { buffer = true },
-                                },
-                            },
-                            -- templates = {
-                                -- folder = "my-templates-folder",
-                                -- date_format = "%Y-%m-%d-%a",
-                                -- time_format = "%H:%M",
-                                -- },
-                            })
-                        end,
-                    },
-
-                    {
-                        "nvim-lua/plenary.nvim",
-                        priority = 1000, -- Lade es früh
-                    },
-
-                    {
-                        "hrsh7th/nvim-cmp",
-                        dependencies = {
-                            "hrsh7th/cmp-nvim-lsp",
-                            "hrsh7th/cmp-buffer",
-                            "hrsh7th/cmp-path",
-                            "hrsh7th/cmp-cmdline",
-                        },
-                        config = function()
-                            local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
-                            cmp.setup({
-                                mapping = {
-                                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                                    -- Weitere Mappings, z.B. für Tab:
-                                    ["<Tab>"] = cmp.mapping(function(fallback)
-                                        if cmp.visible() then
-                                            cmp.select_next_item()
-                                        else
-                                            fallback()
-                                        end
-                                    end, { "i", "s" }),
-                                },
-                                sources = {
+                            sources = {
                                 { name = "nvim_lsp" },
                                 { name = "buffer" },
                                 { name = "path" },
                                 { name = "cmdline" },
                             },
-                            })
-                        end
-                    },
+                        })
+                    end
+                },
 
-                    {
-                        'mzlogin/vim-markdown-toc',
-                    },
 
-                    -- Colorschemes
-                    { "morhetz/gruvbox" },
-                    { "rakr/vim-one" }
-                })
+                -- Colorschemes
+                { "morhetz/gruvbox" },
+                { "rakr/vim-one" }
+            })
