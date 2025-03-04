@@ -121,6 +121,17 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             end
         },
 
+        {
+            "windwp/nvim-autopairs",
+            config = function()
+                require("nvim-autopairs").setup({
+                    check_ts = false,  -- Use Treesitter for better pairing
+                    map_cr = true,  -- Map <CR> to insert newlines inside pairs
+                    map_complete = true,  -- Automatically close when typing in insert mode
+                })
+            end
+        },
+
         -- Statusline
         {
             "nvim-lualine/lualine.nvim",
@@ -223,18 +234,18 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                                 nvim_cmp = true,
                                 min_chars = 2,
                             },
-                            daily_notes = {
-                                -- Optional, if you keep daily notes in a separate directory.
-                                folder = "notes/dailies",
-                                -- Optional, if you want to change the date format for the ID of daily notes.
-                                date_format = "%Y-%m-%d",
-                                -- Optional, if you want to change the date format of the default alias of daily notes.
-                                alias_format = "%B %-d, %Y",
-                                -- Optional, default tags to add to each new daily note created.
-                                default_tags = { "daily-notes" },
-                                -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-                                template = nil
-                            },
+                            -- daily_notes = {
+                                -- -- Optional, if you keep daily notes in a separate directory.
+                                -- folder = "notes/dailies",
+                                -- -- Optional, if you want to change the date format for the ID of daily notes.
+                                -- date_format = "%Y-%m-%d",
+                                -- -- Optional, if you want to change the date format of the default alias of daily notes.
+                                -- alias_format = "%B %-d, %Y",
+                                -- -- Optional, default tags to add to each new daily note created.
+                                -- default_tags = { "daily-notes" },
+                                -- -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+                                -- template = nil
+                            -- },
                             mappings = {
                                 -- Toggle check-boxes.
                                 ["<leader>ch"] = {
@@ -280,6 +291,12 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                                         end
                                     end, { "i", "s" }),
                                 },
+                                sources = {
+                                { name = "nvim_lsp" },
+                                { name = "buffer" },
+                                { name = "path" },
+                                { name = "cmdline" },
+                            },
                             })
                         end
                     },

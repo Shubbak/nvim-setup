@@ -31,6 +31,9 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 
 vim.keymap.set("n", "<F5>", ":w<CR>:terminal python3 %<CR>", {noremap = true})
 
+-- file explorer
+vim.keymap.set("n", "<leader>d", ":NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
+
 -- Window splitting and navigation
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
