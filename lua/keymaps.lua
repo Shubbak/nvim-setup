@@ -55,3 +55,8 @@ vim.keymap.set("n", "<enter>", "o<esc>k", { noremap = true })
 
 -- Map leader+s to open the LaTeX viewer
 vim.keymap.set("n", "<leader>s", ":VimtexView<CR>", { noremap = true })
+
+-- LSP specific keybindings
+vim.keymap.set("n", "<leader>ls", ":lua vim.diagnostic.open_float()<CR>", {noremap = true, desc = "Show floating error message"})
+vim.keymap.set("n", "<leader>lp", ":lua vim.diagnostic.goto_prev()<CR>", {noremap = true, desc = "Go to previous error"})
+vim.keymap.set("n", "<leader>ln", ":lua vim.diagnostic.goto_next()<CR>", {noremap = true, desc = "Go to next error"})
