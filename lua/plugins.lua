@@ -224,6 +224,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                 "nvim-telescope/telescope.nvim"
             },
             config = function()
+                vim.opt.conceallevel = 1
                 require("obsidian").setup({
                     workspaces = {
                         {
@@ -257,11 +258,11 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                                 -- opts = { buffer = true },
                             },
                         },
-                        -- templates = {
-                            -- folder = "my-templates-folder",
-                            -- date_format = "%Y-%m-%d-%a",
-                            -- time_format = "%H:%M",
-                            -- },
+                        templates = {
+                            folder = "Vorlagen",
+                            date_format = "%Y-%m-%d-%a",
+                            time_format = "%H:%M",
+                            },
                         })
                     end,
                 },
