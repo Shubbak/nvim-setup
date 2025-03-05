@@ -31,6 +31,9 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 
 vim.keymap.set("n", "<F5>", ":w<CR>:terminal python3 %<CR>", {noremap = true})
 
+-- file explorer
+vim.keymap.set("n", "<leader>d", ":NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
+
 -- Window splitting and navigation
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true })
@@ -52,3 +55,8 @@ vim.keymap.set("n", "<enter>", "o<esc>k", { noremap = true })
 
 -- Map leader+s to open the LaTeX viewer
 vim.keymap.set("n", "<leader>s", ":VimtexView<CR>", { noremap = true })
+
+-- LSP specific keybindings
+vim.keymap.set("n", "<leader>ls", ":lua vim.diagnostic.open_float()<CR>", {noremap = true, desc = "Show floating error message"})
+vim.keymap.set("n", "<leader>lp", ":lua vim.diagnostic.goto_prev()<CR>", {noremap = true, desc = "Go to previous error"})
+vim.keymap.set("n", "<leader>ln", ":lua vim.diagnostic.goto_next()<CR>", {noremap = true, desc = "Go to next error"})
