@@ -62,6 +62,14 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 
         {
             "nvim-telescope/telescope.nvim",
+            cmd = "Telescope",  -- Lazy-load on command
+            ft = "python",  -- Load when opening a Python file
+            keys = {  -- Load when pressing these keymaps
+                { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+                { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+                { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
+                { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
+            },
             dependencies = { "nvim-lua/plenary.nvim" },
             config = function()
                 local telescope = require("telescope")
@@ -84,7 +92,6 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
                 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
             end,
-            ft = {"python"}
         },
 
         {

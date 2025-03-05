@@ -67,5 +67,5 @@ vim.api.nvim_set_keymap("n", "<Leader>e", ":lua EngType()<CR>", { noremap = true
 vim.api.nvim_set_keymap("n", "<Leader>g", ":lua GerType()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>a", ":lua AraType()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>t", ":lua TranscriptType()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Leader>f", ":lua FontMesloGerman()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<Leader>f", ":lua FontMesloGerman()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>b", ":lua SpellBili()<CR>", { noremap = true, silent = true })
