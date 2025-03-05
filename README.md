@@ -38,3 +38,4 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 + In case you want to add an alias in Windows, call `nvim $PROFILE` and add `New-Alias your-alias nvim` to the last line
 + If in Windows running the script doesn't do anything, try running winget and see if it prompts you to grant it rights.
 + If scripts can't run in Windows, `Get-ExecutionPolicy` and if Restricted `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
++ You will need to install lsp-servers manually. maybe a #todo to automate it

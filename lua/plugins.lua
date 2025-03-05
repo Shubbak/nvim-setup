@@ -61,6 +61,34 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
         },
 
         {
+            "neovim/nvim-lspconfig",
+            ft = {"python", "tex"},
+            config = function()
+                local lspconfig = require("lspconfig")
+
+                lspconfig.texlab.setup {} 
+                lspconfig.pyright.setup {}
+
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, {desc = "Got to definition"})
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Hover documentation"})
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {desc = "Rename symbol"})
+            end,
+        },
+
+        {
+            "nvim-treesitter/nvim-treesitter",
+            build = ":TSUpdate",
+            config = function()
+                require("nvim-treesitter.configs").setup({
+                ensure_installed = {"python", "latex"},
+                highlight = {enable = true},
+                indent = {enale = true},
+                fold = {enable = true},
+                })
+            end
+        },
+
+        {
             "github/copilot.vim",
             ft = {"python"},
             config = function()
@@ -290,13 +318,8 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                             mapping = {
                                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                                 -- Weitere Mappings, z.B. für Tab:
-                                ["<Tab>"] = cmp.mapping(function(fallback)
-                                    if cmp.visible() then
-                                        cmp.select_next_item()
-                                    else
-                                        fallback()
-                                    end
-                                end, { "i", "s" }),
+                                ["<Tab>"] = cmp.mapping.select_next_item() ,
+                                ["<S-Tab>"] = cmp.mapping.select_prev_item() ,
                             },
                             sources = {
                                 { name = "nvim_lsp" },
