@@ -61,6 +61,15 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
         },
 
         {
+            "github/copilot.vim",
+            ft = {"python"},
+            config = function()
+		    vim.g.copilot_no_tab_map = true  -- Disable default `<Tab>` mapping
+		    vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+            end
+        },
+
+        {
             "nvim-telescope/telescope.nvim",
             cmd = "Telescope",  -- Lazy-load on command
             ft = "python",  -- Load when opening a Python file
