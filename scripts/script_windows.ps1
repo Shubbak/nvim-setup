@@ -78,8 +78,8 @@ if (-not (Test-Path $FontDir)) {
 $mesloFontFile = Join-Path $FontDir "MesloLGMNerdFontMono-Regular.ttf"
 if (-not (Test-Path $mesloFontFile)) {
     Write-Host "$FONT_NAME_MESLO not found, installing..."
-    $mesloUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
-    $mesloZip = Join-Path $FontDir "Meslo.zip"
+    $mesloUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
+    $mesloZip = Join-Path $FontDir "FiraCode.zip"
 
     Invoke-WebRequest -Uri $mesloUrl -OutFile $mesloZip -UseBasicParsing
     Expand-Archive -Path $mesloZip -DestinationPath $FontDir -Force

@@ -50,10 +50,10 @@ end
 
 -- Function to switch font to Meslo Nerd Font Mono and enable German spellcheck
 function FontMesloGerman()
-    vim.opt.guifont = "MesloLGM Nerd Font Mono"
+    vim.opt.guifont = "FiraCode Nerd Font Mono:h12"
     vim.opt.spell = true
     vim.opt.spelllang = "de"
-    print("Switched to Meslo Nerd Font + German Spellcheck")
+    print("Switched to FiraCode + German Spellcheck")
 end
 
 function SpellBili()

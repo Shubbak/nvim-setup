@@ -68,7 +68,7 @@ vim.o.history = 1000
 -- Detect if Neovim is running in a GUI
 if vim.g.neovide then
     -- Set the GUI font
-    vim.opt.guifont = "MesloLGM Nerd Font Mono"
+    vim.opt.guifont = "FiraCode Nerd Font Mono:h12"
 else
     -- Set terminal cursor shape settings
     -- vim.opt.t_SI = "\27[5 q"  -- Insert mode cursor

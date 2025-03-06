@@ -80,21 +80,21 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             build = ":TSUpdate",
             config = function()
                 require("nvim-treesitter.configs").setup({
-                ensure_installed = {"python", "latex"},
-                highlight = {enable = true},
-                indent = {enale = true},
-                fold = {enable = true},
+                    ensure_installed = {"python", "latex"},
+                    highlight = {enable = true},
+                    indent = {enale = true},
+                    fold = {enable = true},
                 })
             end,
-	    ft = {"python"}
+            ft = {"python"}
         },
 
         {
             "github/copilot.vim",
             ft = {"python"},
             config = function()
-		    vim.g.copilot_no_tab_map = true  -- Disable default `<Tab>` mapping
-		    vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+                vim.g.copilot_no_tab_map = true  -- Disable default `<Tab>` mapping
+                vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
             end
         },
 
@@ -188,10 +188,24 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                         disabled_filetypes = { "NvimTree", "packer" },
                     },
                     sections = {
-                        lualine_b = { "branch", "diff" },
+                        lualine_b = { "branch", "diff", "diagnostics" },
                         lualine_c = { "filename" },
-                        lualine_x = {get_hex, "encoding", "fileformat", "filetype" },
-                        -- lualine_x = {"encoding", "fileformat", "filetype" },
+                        -- lualine_x = {get_hex, "encoding", "fileformat", "filetype" },
+                        lualine_x = {
+                            function()
+                                local ok, pomo = pcall(require, "pomo")
+                                if not ok then
+                                    return ""
+                                end
+
+                                local timer = pomo.get_first_to_finish()
+                                if timer == nil then
+                                    return ""
+                                end
+
+                                return "󰄉 " .. tostring(timer)
+                            end,
+                            "encoding", "fileformat", "filetype" },
                         lualine_y = { "progress", "location" },
                         lualine_z = { "%m" },
                     },
@@ -300,47 +314,47 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                             folder = "Vorlagen",
                             date_format = "%Y-%m-%d-%a",
                             time_format = "%H:%M",
-                            },
-                        })
-                    end,
-                },
+                        },
+                    })
+                end,
+            },
 
-                {
-                    "hrsh7th/nvim-cmp",
-                    dependencies = {
-                        "hrsh7th/cmp-nvim-lsp",
-                        "hrsh7th/cmp-buffer",
-                        "hrsh7th/cmp-path",
-                        "hrsh7th/cmp-cmdline",
-                        -- "quangnguyen30192/cmp-nvim-ultisnips"
+            {
+                "hrsh7th/nvim-cmp",
+                dependencies = {
+                    "hrsh7th/cmp-nvim-lsp",
+                    "hrsh7th/cmp-buffer",
+                    "hrsh7th/cmp-path",
+                    "hrsh7th/cmp-cmdline",
+                    -- "quangnguyen30192/cmp-nvim-ultisnips"
+                },
+                config = function()
+                    local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
+                    cmp.setup({
+                        mapping = {
+                            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                            -- Weitere Mappings, z.B. für Tab:
+                            ["<Tab>"] = cmp.mapping.select_next_item() ,
+                            ["<S-Tab>"] = cmp.mapping.select_prev_item() ,
+                        },
+                        sources = {
+                            { name = "nvim_lsp" },
+                            { name = "buffer" },
+                            { name = "path" },
+                            { name = "cmdline" },
+                            {name = "ultisnips"},
+                        },
+                        -- snippet = {
+                            -- expand = function(args)
+                                -- vim.fn["UltiSnips#Anon"](args.body)
+                                -- end,
+                                -- },
+                            })
+                        end
                     },
-                    config = function()
-                        local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
-                        cmp.setup({
-                            mapping = {
-                                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                                -- Weitere Mappings, z.B. für Tab:
-                                ["<Tab>"] = cmp.mapping.select_next_item() ,
-                                ["<S-Tab>"] = cmp.mapping.select_prev_item() ,
-                            },
-                            sources = {
-                                { name = "nvim_lsp" },
-                                { name = "buffer" },
-                                { name = "path" },
-                                { name = "cmdline" },
-                                {name = "ultisnips"},
-                            },
-			    -- snippet = {
-				    -- expand = function(args)
-					    -- vim.fn["UltiSnips#Anon"](args.body)
-				    -- end,
-			    -- },
-                        })
-                    end
-                },
 
 
-                -- Colorschemes
-                { "morhetz/gruvbox" },
-                { "rakr/vim-one" }
-            })
+                    -- Colorschemes
+                    { "morhetz/gruvbox" },
+                    { "rakr/vim-one" }
+                })

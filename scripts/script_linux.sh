@@ -79,6 +79,39 @@ else
     echo "zathura already installed."
 fi
 
+read -p "Do you want to set up LSP for Python and LaTeX? (y/n)" choice
+choice=${choice,,}
+if choice == "y"; then
+    echo "Installing npm, tree-sitter, and pyright..."
+
+    if ! command_exists npm then
+        echo "npm not found, installing..."
+        sudo apt install -y npm
+        echo "npm installed."
+    fi
+
+    if ! command_exists tree-sitter then
+        echo "tree-sitter not found, installing..."
+        sudo npm install -g tree-sitter-cli
+        echo "tree-sitter installed."
+    fi
+
+    if ! command_exists pyright then
+        echo "pyright not found, installing..."
+        sudo npm install -g pyright
+        echo "pyright installed."
+    fi
+
+    if ! command_exists texlab then
+        echo "texlab not found, installing..."
+        wget -q https://github.com/latex-lsp/texlab/releases/download/v5.22.1/texlab-x86_64-linux.tar.gz
+        tar -xzf texlab-x86_64-linux.tar.gz
+        sudo mv texlab /usr/local/bin/
+        rm texlab-x86_64-linux.tar.gz
+        echo "texlab installed."
+    fi
+fi
+
 # Function to prompt user for TeX Live installation
     choose_texlive_option() {
         while true; do
@@ -148,8 +181,8 @@ fi
 
 if ! fc-list | grep -q "$FONT_NAME_MESLO"; then
     echo "$FONT_NAME_MESLO not found, installing..."
-    FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip"
-        FONT_ARCHIVE="$FONT_DIR/Meslo.zip"
+    FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
+        FONT_ARCHIVE="$FONT_DIR/FiraCode.zip"
         
         wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
         unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
