@@ -85,7 +85,8 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                 indent = {enale = true},
                 fold = {enable = true},
                 })
-            end
+            end,
+	    ft = {"python"}
         },
 
         {
@@ -236,9 +237,9 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             "sirver/ultisnips",
             dependencies = {'honza/vim-snippets'},
             config = function()
-                vim.g.UltiSnipsExpandTrigger = "<tab>"
-                vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
-                vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+                vim.g.UltiSnipsExpandTrigger = "<C-K>"
+                vim.g.UltiSnipsJumpForwardTrigger = "<C-K>"
+                vim.g.UltiSnipsJumpBackwardTrigger = "<C-S-K>"
                 vim.g.UltiSnipsSnippetDirectories = {vim.fn.getcwd() .. "/snippets", "UltiSnips"}
             end
         },
@@ -311,6 +312,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                         "hrsh7th/cmp-buffer",
                         "hrsh7th/cmp-path",
                         "hrsh7th/cmp-cmdline",
+                        -- "quangnguyen30192/cmp-nvim-ultisnips"
                     },
                     config = function()
                         local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
@@ -326,7 +328,13 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                                 { name = "buffer" },
                                 { name = "path" },
                                 { name = "cmdline" },
+                                {name = "ultisnips"},
                             },
+			    -- snippet = {
+				    -- expand = function(args)
+					    -- vim.fn["UltiSnips#Anon"](args.body)
+				    -- end,
+			    -- },
                         })
                     end
                 },
