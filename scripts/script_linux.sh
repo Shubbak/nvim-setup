@@ -6,66 +6,84 @@ command_exists() {
 }
 
 # Install Snap if not installed
-if ! command_exists snap 
-then
-    echo "Snap is not installed. Installing Snap..."
-    sudo apt update
-    sudo apt install -y snapd
-fi
+# if ! command_exists snap 
+# then
+    # echo "Snap is not installed. Installing Snap..."
+    # sudo apt update
+    # sudo apt install -y snapd
+# else
+    # echo "Snap is already installed."
+# fi
 
 # Install wget and unzip if not installed
 
 if ! command_exists wget ; then
     echo "wget not found, installing..."
     sudo apt install -y wget
+else
+    echo "wget is already installed."
 fi
 
 if ! command_exists unzip ; then
     echo "unzip not found, installing..."
     sudo apt install -y unzip
+else
+    echo "unzip is already installed."
 fi
 
 # Install nvim if not installed
-if ! command_exists nvim 
-then
-    echo "Neovim is not installed. Installing Neovim..."
-    sudo snap install nvim --classic
-    echo "Neovim installation complete!"
+# if ! command_exists nvim 
+# then
+    # echo "Neovim is not installed. Installing Neovim..."
+    # sudo snap install nvim --classic
+    # echo "Neovim installation complete!"
+# else
+    # echo "Neovim is already installed."
+# fi
+
+# Install nvim if not installed
+if ! command_exists nvim; then
+    echo "Neovim not installed. Installing Neovim..."
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt update
+    sudo apt install -y neovim
+    echo "Neovim installed!"
 else
     echo "Neovim is already installed."
 fi
 
-read -p "Do you want to install neovide? (y/n)" choice
+if ! command_exists neovide; then
+    echo "Neovide is not installed."
 
-# Convert input to lowercase
-choice=${choice,,}
+    read -p "Do you want to install neovide? (y/n)" choice
 
-if [[ "$choice" == "y" ]]; then
+    # Convert input to lowercase
+    choice=${choice,,}
 
-    # Check if neovide is installed
-    if ! command_exists neovide; then
-        echo "Neovide is not installed."
+    if [[ "$choice" == "y" ]]; then
 
-      # Check if rust is installed
-      if ! command_exists rustc; then
-          echo "Rust is not installed. Installing Rust..."
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-          source $HOME/.cargo/env
-          echo "Rust has been installed."
+        # Check if neovide is installed
+
+          # Check if rust is installed
+          if ! command_exists rustc; then
+              echo "Rust is not installed. Installing Rust..."
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+              source $HOME/.cargo/env
+              echo "Rust has been installed."
+          else
+              echo "Rust is already installed."
+          fi
+
+          # Install neovide using rust
+          echo "Installing Neovide..."
+          git clone https://github.com/neovide/neovide.git
+          cd neovide || exit
+          cargo build --release
+          sudo mv ./target/release/neovide /usr/local/bin/
+
+          echo "Neovide has been installed."
       else
-          echo "Rust is already installed."
-      fi
-
-      # Install neovide using rust
-      echo "Installing Neovide..."
-      git clone https://github.com/neovide/neovide.git
-      cd neovide || exit
-      cargo build --release
-      sudo mv ./target/release/neovide /usr/local/bin/
-
-      echo "Neovide has been installed."
-  else
-      echo "Neovide is already installed."
+          echo "Neovide is already installed."
     fi
 fi
 
@@ -132,30 +150,30 @@ choose_texlive_option() {
         echo "  no    - Skip TeX Live installation"
         read -p "Your choice: " choice
 
-            # Convert input to lowercase
-            choice=${choice,,}
+        # Convert input to lowercase
+        choice=${choice,,}
 
-            if [[ "$choice" == "full" ]]; then
-                echo "Installing full TeX Live..."
-                sudo apt update && sudo apt install -y texlive-full
-                echo "TeX Live installation complete!"
-                break
-            elif [[ "$choice" == "small" ]]; then
-                echo "Installing recommended TeX Live..."
-                sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex texlive-science
-                echo "TeX Live installation complete!"
-                break
-            elif [[ "$choice" == "no" ]]; then
-                echo "Skipping TeX Live installation."
-                break
-            else
-                echo "Invalid choice. Please enter 'full', 'small', or 'no'."
-            fi
-        done
-    }
+        if [[ "$choice" == "full" ]]; then
+            echo "Installing full TeX Live..."
+            sudo apt update && sudo apt install -y texlive-full
+            echo "TeX Live installation complete!"
+            break
+        elif [[ "$choice" == "small" ]]; then
+            echo "Installing recommended TeX Live..."
+            sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex texlive-science
+            echo "TeX Live installation complete!"
+            break
+        elif [[ "$choice" == "no" ]]; then
+            echo "Skipping TeX Live installation."
+            break
+        else
+            echo "Invalid choice. Please enter 'full', 'small', or 'no'."
+        fi
+    done
+}
 
 # Call the function
-if command -v tex >/dev/null 2>&1; then
+if command_exists tex; then
     echo "TeX Live is installed."
 else
     choose_texlive_option
@@ -163,7 +181,7 @@ fi
 
 # Prompt user for latexmk installation
 
-if command -v latexmk >/dev/null 2>&1; then
+if ! command_exists latexmk; then
     read -p "Do you want to install latexmk? (y/n): " choice
 
     # Convert input to lowercase to handle 'Y' or 'y'
@@ -177,11 +195,12 @@ if command -v latexmk >/dev/null 2>&1; then
     else
         echo "Skipping latexmk installation."
     fi
+    echo "latexmk is already installed."
 fi
 
 # Install MesloLGM Nerd Font Mono if not installed
 
-FONT_NAME_MESLO="MesloLGM Nerd Font Mono"
+FONT_NAME_MESLO="FiraCode Nerd Font Mono"
 FONT_NAME_KAWKAB="Kawkab Mono"
 FONT_DIR="$HOME/.local/share/fonts"
 
