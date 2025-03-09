@@ -2,7 +2,7 @@
 
 
 command_exists() {
-  command -v "$1" &>/dev/null
+    command -v "$1" &>/dev/null
 }
 
 # Install Snap if not installed
@@ -44,16 +44,16 @@ if [[ "$choice" == "y" ]]; then
 
     # Check if neovide is installed
     if ! command_exists neovide; then
-      echo "Neovide is not installed."
+        echo "Neovide is not installed."
 
       # Check if rust is installed
       if ! command_exists rustc; then
-        echo "Rust is not installed. Installing Rust..."
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-        source $HOME/.cargo/env
-        echo "Rust has been installed."
+          echo "Rust is not installed. Installing Rust..."
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          source $HOME/.cargo/env
+          echo "Rust has been installed."
       else
-        echo "Rust is already installed."
+          echo "Rust is already installed."
       fi
 
       # Install neovide using rust
@@ -64,7 +64,7 @@ if [[ "$choice" == "y" ]]; then
       sudo mv ./target/release/neovide /usr/local/bin/
 
       echo "Neovide has been installed."
-    else
+  else
       echo "Neovide is already installed."
     fi
 fi
@@ -81,45 +81,56 @@ fi
 
 read -p "Do you want to set up LSP for Python and LaTeX? (y/n)" choice
 choice=${choice,,}
-if choice == "y"; then
+if [[ "$choice" == "y" ]]; then
     echo "Installing npm, tree-sitter, and pyright..."
 
-    if ! command_exists npm then
+    if ! command_exists npm; then
         echo "npm not found, installing..."
         sudo apt install -y npm
         echo "npm installed."
+    else
+        echo "npm already installed"
     fi
 
-    if ! command_exists tree-sitter then
+
+    if ! command_exists tree-sitter; then
         echo "tree-sitter not found, installing..."
         sudo npm install -g tree-sitter-cli
         echo "tree-sitter installed."
+    else
+        echo "tree-sitter already installed"
     fi
 
-    if ! command_exists pyright then
+    if ! command_exists pyright; then
         echo "pyright not found, installing..."
         sudo npm install -g pyright
         echo "pyright installed."
+    else
+        echo "pyright already installed"
     fi
 
-    if ! command_exists texlab then
+    if ! command_exists texlab; then
         echo "texlab not found, installing..."
         wget -q https://github.com/latex-lsp/texlab/releases/download/v5.22.1/texlab-x86_64-linux.tar.gz
         tar -xzf texlab-x86_64-linux.tar.gz
         sudo mv texlab /usr/local/bin/
         rm texlab-x86_64-linux.tar.gz
         echo "texlab installed."
+    else
+        echo "texlab already installed"
     fi
+else
+    echo "Skipping LSP setup"
 fi
 
 # Function to prompt user for TeX Live installation
-    choose_texlive_option() {
-        while true; do
-            echo -e "\nChoose TeX Live installation:\n"
-            echo "  full  - Install texlive-full (~6GB, never worry about packages)"
-            echo "  small - Install a recommended TeX Live setup"
-            echo "  no    - Skip TeX Live installation"
-            read -p "Your choice: " choice
+choose_texlive_option() {
+    while true; do
+        echo -e "\nChoose TeX Live installation:\n"
+        echo "  full  - Install texlive-full (~6GB, never worry about packages)"
+        echo "  small - Install a recommended TeX Live setup"
+        echo "  no    - Skip TeX Live installation"
+        read -p "Your choice: " choice
 
             # Convert input to lowercase
             choice=${choice,,}
@@ -182,14 +193,14 @@ fi
 if ! fc-list | grep -q "$FONT_NAME_MESLO"; then
     echo "$FONT_NAME_MESLO not found, installing..."
     FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
-        FONT_ARCHIVE="$FONT_DIR/FiraCode.zip"
-        
-        wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
-        unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
-        sudo fc-cache -fv
-        rm "$FONT_ARCHIVE"
+    FONT_ARCHIVE="$FONT_DIR/FiraCode.zip"
 
-        echo "$FONT_NAME_MESLO installed successfully."
+    wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
+    unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
+    sudo fc-cache -fv
+    rm "$FONT_ARCHIVE"
+
+    echo "$FONT_NAME_MESLO installed successfully."
 else
     echo "$FONT_NAME_MESLO is already installed."
 fi
@@ -197,14 +208,14 @@ fi
 if ! fc-list | grep -q "$FONT_NAME_KAWKAB"; then
     echo "$FONT_NAME_KAWKAB not found, installing..."
     FONT_URL="https://makkuk.com/kawkab-mono/downloads/kawkab-mono-0.500.zip"
-        FONT_ARCHIVE="$FONT_DIR/kawkab-mono-0.500.zip"
-        
-        wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
-        unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
-        sudo fc-cache -fv
-        rm "$FONT_ARCHIVE"
+    FONT_ARCHIVE="$FONT_DIR/kawkab-mono-0.500.zip"
 
-        echo "$FONT_NAME_KAWKAB installed successfully."
+    wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
+    unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
+    sudo fc-cache -fv
+    rm "$FONT_ARCHIVE"
+
+    echo "$FONT_NAME_KAWKAB installed successfully."
 else
     echo "$FONT_NAME_KAWKAB is already installed."
 fi
