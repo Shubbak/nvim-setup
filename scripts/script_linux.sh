@@ -181,7 +181,7 @@ fi
 
 # Install MesloLGM Nerd Font Mono if not installed
 
-FONT_NAME_MESLO="MesloLGM Nerd Font Mono"
+FONT_NAME_MESLO="FiraCode Nerd Font Mono"
 FONT_NAME_KAWKAB="Kawkab Mono"
 FONT_DIR="$HOME/.local/share/fonts"
 

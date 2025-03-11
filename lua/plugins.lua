@@ -89,13 +89,35 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             ft = {"python"}
         },
 
+        -- {
+            -- "github/copilot.vim",
+            -- ft = {"python"},
+            -- config = function()
+                -- vim.g.copilot_no_tab_map = true  -- Disable default `<Tab>` mapping
+                -- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+            -- end
+        -- },
+        
         {
-            "github/copilot.vim",
-            ft = {"python"},
+            "zbirenbaum/copilot.lua",
             config = function()
-                vim.g.copilot_no_tab_map = true  -- Disable default `<Tab>` mapping
-                vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
-            end
+                require("copilot").setup({
+                    -- Set any other configuration options you need here
+                    -- You can add custom mappings or settings
+                    suggestion = {
+                        enabled = true,
+                        auto_trigger = true,
+                        keymap = {
+                            accept = "<C-J>",  -- Customize the keybinding to accept suggestions
+                            next = "<C-K>",    -- Move to next suggestion
+                            prev = "<C-L>",    -- Move to previous suggestion
+                        },
+                    },
+                    panel = {
+                        enabled = true,
+                    }
+                })
+            end,
         },
 
         {
@@ -251,9 +273,9 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             "sirver/ultisnips",
             dependencies = {'honza/vim-snippets'},
             config = function()
-                vim.g.UltiSnipsExpandTrigger = "<C-K>"
-                vim.g.UltiSnipsJumpForwardTrigger = "<C-K>"
-                vim.g.UltiSnipsJumpBackwardTrigger = "<C-S-K>"
+                vim.g.UltiSnipsExpandTrigger = "<C-I>"
+                vim.g.UltiSnipsJumpForwardTrigger = "<C-I>"
+                vim.g.UltiSnipsJumpBackwardTrigger = "<C-S-I>"
                 vim.g.UltiSnipsSnippetDirectories = {vim.fn.getcwd() .. "/snippets", "UltiSnips"}
             end
         },
