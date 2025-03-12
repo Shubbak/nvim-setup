@@ -273,9 +273,9 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
             "sirver/ultisnips",
             dependencies = {'honza/vim-snippets'},
             config = function()
-                vim.g.UltiSnipsExpandTrigger = "<C-I>"
-                vim.g.UltiSnipsJumpForwardTrigger = "<C-I>"
-                vim.g.UltiSnipsJumpBackwardTrigger = "<C-S-I>"
+                vim.g.UltiSnipsExpandTrigger = "<Tab>"
+                vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
+                vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
                 vim.g.UltiSnipsSnippetDirectories = {vim.fn.getcwd() .. "/snippets", "UltiSnips"}
             end
         },
@@ -343,6 +343,7 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 
             {
                 "hrsh7th/nvim-cmp",
+                ft = {"python"},
                 dependencies = {
                     "hrsh7th/cmp-nvim-lsp",
                     "hrsh7th/cmp-buffer",
