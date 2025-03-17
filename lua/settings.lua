@@ -76,7 +76,7 @@ else
 end
 
 -- Set colorscheme and background
-vim.cmd("colorscheme one")
+vim.cmd("colorscheme gruvbox")
 vim.opt.background = "dark"
 
 -- Disable error and visual bells
