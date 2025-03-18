@@ -139,6 +139,14 @@ local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
                         layout_config = { prompt_position = "top" },
                         sorting_strategy = "ascending",
                         winblend = 0,
+                        vimgrep_arguments = {
+                            "rg",
+                            "--hidden",
+                            -- "--ignore-file",
+                            "--glob", "!.git",
+                            "--no-ignore",
+                        },
+                        file_ignore_patterns = { ".git/" },
                     },
                     pickers = {
                         find_files = { hidden = true },
