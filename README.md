@@ -55,3 +55,5 @@ passwort=password
 domain=its-ad
 ```
 then secure it `sudo chmod 600 /etc/smb-credentials`
+
+
