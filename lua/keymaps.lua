@@ -62,7 +62,8 @@ vim.keymap.set("n", "<leader>lp", ":lua vim.diagnostic.goto_prev()<CR>", {norema
 vim.keymap.set("n", "<leader>ln", ":lua vim.diagnostic.goto_next()<CR>", {noremap = true, desc = "Go to next error"})
 
 -- Pomodoroe specific keybindings
-vim.keymap.set("n", "<leader>ps", ":TimerSession<CR>", {noremap = true, desc = "Start Pomodoro session"})
+vim.keymap.set("n", "<leader>ps8", ":TimerSession eight<CR>", {noremap = true, desc = "Start Pomodoro session"})
+vim.keymap.set("n", "<leader>ps6", ":TimerSession six<CR>", {noremap = true, desc = "Start Pomodoro session"})
 vim.keymap.set("n", "<leader>ph", ":TimerHide<CR>", {noremap = true, desc = "Hide Pomodoro timer"})
 vim.keymap.set("n", "<leader>pp", ":TimerPause<CR>", {noremap = true, desc = "Pause Pomodoro timer"})
 vim.keymap.set("n", "<leader>pr", ":TimerResume<CR>", {noremap = true, desc = "Resume Pomodoro timer"})
