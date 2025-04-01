@@ -78,6 +78,14 @@ end
 -- Set colorscheme and background
 vim.cmd("colorscheme gruvbox")
 vim.opt.background = "dark"
+-- Set options for transparent background
+vim.cmd('highlight Normal ctermbg=none guibg=none')
+vim.cmd('highlight NormalNC ctermbg=none guibg=none')
+vim.cmd('highlight SignColumn ctermbg=none guibg=none')
+vim.cmd('highlight VertSplit ctermbg=none guibg=none')
+vim.cmd('highlight StatusLine ctermbg=none guibg=none')
+vim.cmd('highlight StatusLineNC ctermbg=none guibg=none')
+
 
 -- Disable error and visual bells
 vim.opt.errorbells = false
