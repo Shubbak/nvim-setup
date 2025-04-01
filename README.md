@@ -39,3 +39,21 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 + If in Windows running the script doesn't do anything, try running winget and see if it prompts you to grant it rights.
 + If scripts can't run in Windows, `Get-ExecutionPolicy` and if Restricted `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 + You will need to install lsp-servers manually. maybe a #todo to automate it
+
+# Various other things I'll need
+## Connect smb server (exp4)
+```
+sudo apt install cifs-utils smbclient
+mkdir -p /mnt/exp4_all
+sudo mount -t cifs -o username=username,password=password,domain=its-ad \\\\smb.domain.de\\server /mnt/exp4_all/
+```
+Make it persistent by `\\\\smb.domain.de\\server /mnt/smbshare cifs credentials=/etc/smb-credentials,iocharset=utf8,sec=ntlm 0 0`
+and creating the credentials file `sudo nvim /etc/smb-credentials` with content:
+```
+username=username
+passwort=password
+domain=its-ad
+```
+then secure it `sudo chmod 600 /etc/smb-credentials`
+
+

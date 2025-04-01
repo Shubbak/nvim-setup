@@ -146,8 +146,9 @@ choose_texlive_option() {
     while true; do
         echo -e "\nChoose TeX Live installation:\n"
         echo "  full  - Install texlive-full (~6GB, never worry about packages)"
-        echo "  small - Install a recommended TeX Live setup"
+        echo "  small - Install a science-based TeX Live setup"
         echo "  no    - Skip TeX Live installation"
+        echo " hint: I only had trouble with anything but 'full', so only install anything else if space is a MAJOR concern."
         read -p "Your choice: " choice
 
         # Convert input to lowercase
