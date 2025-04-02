@@ -346,6 +346,7 @@ require("lazy").setup({
     {
         "sirver/ultisnips",
         dependencies = {'honza/vim-snippets'},
+        ft = {" tex" },
         config = function()
             vim.g.UltiSnipsExpandTrigger = "<Tab>"
             vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
@@ -454,6 +455,10 @@ require("lazy").setup({
 
     -- Colorschemes
     { "morhetz/gruvbox" },
-    { "rakr/vim-one" }
+
+    {
+        "rakr/vim-one",
+        lazy = true,
+    }
 
 })
