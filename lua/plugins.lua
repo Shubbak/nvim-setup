@@ -182,6 +182,17 @@ require("lazy").setup({
         dependencies = {
             -- Optional, but highly recommended if you want to use the "Default" timer
             "rcarriga/nvim-notify",
+                config = function()
+                    require("notify").setup({
+                        on_open = function()
+                            if vim.fn.executable("tput") == 1 then
+                                os.execute("tput bel")  -- makes a sound
+                                -- vim.system({ "tput", "bel" })  -- is supposed to be the new, async way
+                            end
+                        end,
+                    background_colour = "#000000",
+                    })
+                end
         },
         config = function()
 
