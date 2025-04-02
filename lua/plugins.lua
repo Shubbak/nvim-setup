@@ -195,16 +195,14 @@ require("lazy").setup({
                 end
         },
         config = function()
-
-            local unpack = unpack or table.unpack  -- Use global unpack if available, otherwise use table.unpack
-
-            local work_session = {
+            local work_session = {   -- just for copy and paste reasons, the unpack doesn't work
                 { name = "Work", duration = "25m" },
                 { name = "Short Break", duration = "5m" },
                 { name = "Work", duration = "25m" },
                 { name = "Short Break", duration = "5m" },
                 { name = "Work", duration = "25m" },
             }
+
             notifiers = {
                 {
                     name = "Default",
@@ -221,29 +219,69 @@ require("lazy").setup({
             require("pomo").setup({
                 sessions = {
                     pomodoro = {
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" }
                     },
 
                     eight = { -- 8:35 total office time && 6:15h total work time
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Very Long Break", duration = "45m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                     },
                     six = { -- 6:30 h of total office time && 5:00h total work
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Slightly Longer Break", duration = "20m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                         { name = "Long Break", duration = "15m" },
-                        unpack(work_session),
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
+                        { name = "Short Break", duration = "5m" },
+                        { name = "Work", duration = "25m" },
                     },
                 },
                 notifiers = notifiers,
