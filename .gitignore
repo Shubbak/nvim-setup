@@ -1,3 +1,4 @@
 # Ignore plugin directory
 plugged/
 neovim/
+lazy-lock.json
