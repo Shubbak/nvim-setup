@@ -1,4 +1,5 @@
 -- Set up plugin directory based on OS
+--
 local function is_windows()
     return vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 end
@@ -356,7 +357,7 @@ require("lazy").setup({
             vim.g.tex_flavor = "latex"
 
             -- For Windows, use SumatraPDF, otherwise use Zathura
-            if is_windows then
+            if is_windows() then
                 vim.g.vimtex_view_general_viewer = "SumatraPDF"
                 vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
             else
@@ -384,7 +385,7 @@ require("lazy").setup({
     {
         "sirver/ultisnips",
         dependencies = {'honza/vim-snippets'},
-        ft = {" tex" },
+        ft = {"tex"},
         config = function()
             vim.g.UltiSnipsExpandTrigger = "<Tab>"
             vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
