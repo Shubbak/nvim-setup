@@ -470,7 +470,7 @@ require("lazy").setup({
             local cmp = require("cmp")  -- Stelle sicher, dass cmp geladen ist
             cmp.setup({
                 mapping = {
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    -- ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     -- Weitere Mappings, z.B. für Tab:
                     ["<Tab>"] = cmp.mapping.select_next_item() ,
                     ["<S-Tab>"] = cmp.mapping.select_prev_item() ,
