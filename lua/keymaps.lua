@@ -46,6 +46,8 @@ vim.keymap.set("n", "<C-Down>", "<C-w>-", { noremap = true })
 vim.keymap.set("n", "<C-Left>", "<C-w><", { noremap = true })
 vim.keymap.set("n", "<C-Right>", "<C-w>>", { noremap = true })
 
+vim.keymap.set("n", "<C-C>", "bp|bd #<CR>", { noremap = true })
+
 -- Map the Guillemet symbol
 -- vim.keymap.set("i", "<<", "«", { noremap = true })
 -- vim.keymap.set("i", ">>", "»", { noremap = true })
