@@ -31,7 +31,7 @@ function AraType()
     vim.opt.keymap = "arabic-pc"
     vim.opt.rightleft = true
     vim.api.nvim_del_keymap("i", "jk")  -- Unmap jk in insert mode
-    vim.opt.guifont = "Kawkab Mono"
+    vim.opt.guifont = "Kawkab Mono:h12"
     -- vim.opt.spell = true
     -- vim.opt.spelllang = "ar"
     vim.opt.spell = false
