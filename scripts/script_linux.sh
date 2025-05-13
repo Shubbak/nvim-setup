@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt update
 
 command_exists() {
     command -v "$1" &>/dev/null
@@ -240,7 +241,7 @@ else
     echo "$FONT_NAME_KAWKAB is already installed."
 fi
 
-echo "Installing Vim-Plug plugins..."
-nvim --headless: +PlugInstall +qall
-echo "Plugins installed successfully."
+# echo "Installing Vim-Plug plugins..."
+# nvim --headless: +PlugInstall +qall
+# echo "Plugins installed successfully."
 
