@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
 command_exists() {
@@ -35,12 +36,11 @@ fi
 # Install nvim if not installed and upgrade if below v 0.12
 if ! command_exists nvim; then
     echo "Neovim not installed. Installing Neovim..."
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt update
     sudo apt install -y neovim
     echo "Neovim installed!"
 else
     echo "Neovim is already installed."
+    sudo apt upgrade neovim
 fi
 
 if ! command_exists neovide; then
