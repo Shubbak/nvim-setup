@@ -32,17 +32,7 @@ else
     echo "unzip is already installed."
 fi
 
-# Install nvim if not installed
-# if ! command_exists nvim 
-# then
-    # echo "Neovim is not installed. Installing Neovim..."
-    # sudo snap install nvim --classic
-    # echo "Neovim installation complete!"
-# else
-    # echo "Neovim is already installed."
-# fi
-
-# Install nvim if not installed
+# Install nvim if not installed and upgrade if below v 0.12
 if ! command_exists nvim; then
     echo "Neovim not installed. Installing Neovim..."
     sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -101,7 +91,7 @@ fi
 read -p "Do you want to set up LSP for Python and LaTeX? (y/n)" choice
 choice=${choice,,}
 if [[ "$choice" == "y" ]]; then
-    echo "Installing npm, tree-sitter, and pyright..."
+    echo "Installing npm, luarocks, tree-sitter, and pyright..."
 
     if ! command_exists npm; then
         echo "npm not found, installing..."
@@ -109,6 +99,15 @@ if [[ "$choice" == "y" ]]; then
         echo "npm installed."
     else
         echo "npm already installed"
+    fi
+
+
+    if ! command_exists luarocks; then
+        echo "luarocks not found, installing..."
+        sudo apt install -y luarocks
+        echo "luarocks installed."
+    else
+        echo "luarocks already installes"
     fi
 
 
