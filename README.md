@@ -57,3 +57,5 @@ domain=its-ad
 then secure it `sudo chmod 600 /etc/smb-credentials`
 
 
+# Issues
+nodejs for copilot

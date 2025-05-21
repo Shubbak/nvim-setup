@@ -111,28 +111,28 @@ require("lazy").setup({
             -- end
             -- },
 
-    {
-        "zbirenbaum/copilot.lua",
-        ft = "python",
-        config = function()
-            require("copilot").setup({
-                -- Set any other configuration options you need here
-                -- You can add custom mappings or settings
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    keymap = {
-                        accept = "<C-J>",  -- Customize the keybinding to accept suggestions
-                        next = "<C-K>",    -- Move to next suggestion
-                        prev = "<C-L>",    -- Move to previous suggestion
-                    },
-                },
-                panel = {
-                    enabled = true,
-                }
-            })
-        end,
-    },
+    -- {
+    --     "zbirenbaum/copilot.lua",   -- Todo: nodejs update
+    --     ft = "python",
+    --     config = function()
+    --         require("copilot").setup({
+    --             -- Set any other configuration options you need here
+    --             -- You can add custom mappings or settings
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true,
+    --                 keymap = {
+    --                     accept = "<C-J>",  -- Customize the keybinding to accept suggestions
+    --                     next = "<C-K>",    -- Move to next suggestion
+    --                     prev = "<C-L>",    -- Move to previous suggestion
+    --                 },
+    --             },
+    --             panel = {
+    --                 enabled = true,
+    --             }
+    --         })
+    --     end,
+    -- },
 
     {
         "nvim-telescope/telescope.nvim",
