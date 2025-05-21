@@ -113,7 +113,7 @@ require("lazy").setup({
 
     {
         "zbirenbaum/copilot.lua",
-        ft = "py",
+        ft = "python",
         config = function()
             require("copilot").setup({
                 -- Set any other configuration options you need here
