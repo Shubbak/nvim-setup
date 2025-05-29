@@ -93,13 +93,13 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = {"python", "latex"},
+                ensure_installed = {"python", "latex", "lua"},
                 highlight = {enable = true},
-                indent = {enale = true},
+                indent = {enable = true},
                 fold = {enable = true},
             })
         end,
-        ft = {"python"}
+        -- ft = {"python", "lua"}
     },
 
     -- {
