@@ -137,7 +137,6 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",  -- Lazy-load on command
-        ft = "python",  -- Load when opening a Python file
         keys = {  -- Load when pressing these keymaps
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
             { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
@@ -167,6 +166,14 @@ require("lazy").setup({
                         --"--no-ignore",
                     },
                     file_ignore_patterns = { ".git/" },
+                    mappings = {
+                        i = {
+                            ["<C-v>"] = require('telescope.actions').file_vsplit
+                        },
+                        n = {
+                            ["<C-v>"] = require('telescope.actions').file_vsplit
+                        },
+                    },
                 },
                 pickers = {
                     find_files = { hidden = true },
