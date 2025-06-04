@@ -93,9 +93,16 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = {"python", "latex", "lua"},
-                highlight = {enable = true},
-                indent = {enable = true},
+                ensure_installed = {"python", "lua", "latex"}, -- remove "latex"  if problem with vimtex / ultisnips
+                highlight = {
+                    enable = true,
+                    -- disable = { "latex" },  -- this is for ultisnips
+                    additional_vim_regex_highlighting = true   -- caution, (here)[https://github.com/nvim-treesitter/nvim-treesitter/issues/1184] it was warned that this may break stuff
+                },
+                indent = {
+                    enable = true,
+                    -- disable = { "latex" },
+                },
                 fold = {enable = true},
             })
         end,
@@ -386,15 +393,15 @@ require("lazy").setup({
     },
 
     -- Conceal support for LaTeX
-    {
-        "KeitaNakamura/tex-conceal.vim",
-        ft = "tex",
-        config = function()
-            vim.opt.conceallevel = 1
-            vim.g.tex_conceal = "abdmg"
-            vim.cmd("hi Conceal ctermbg=none")
-        end
-    },
+    --{
+    --    "KeitaNakamura/tex-conceal.vim",
+    --    ft = "tex",
+    --    config = function()
+    --        vim.opt.conceallevel = 1
+    --        vim.g.tex_conceal = "abdmg"
+    --        vim.cmd("hi Conceal ctermbg=none")
+    --    end
+    --},
 
     {
         "sirver/ultisnips",
