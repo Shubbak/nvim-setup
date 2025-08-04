@@ -321,6 +321,7 @@ require("lazy").setup({
 
     {
         "windwp/nvim-autopairs",
+        ft = {"tex", "python", "lua"},
         config = function()
             require("nvim-autopairs").setup({
                 check_ts = false,  -- Use Treesitter for better pairing

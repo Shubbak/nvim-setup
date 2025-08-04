@@ -71,3 +71,8 @@ vim.keymap.set("n", "<leader>ph", ":TimerHide<CR>", {noremap = true, desc = "Hid
 vim.keymap.set("n", "<leader>pp", ":TimerPause<CR>", {noremap = true, desc = "Pause Pomodoro timer"})
 vim.keymap.set("n", "<leader>pr", ":TimerResume<CR>", {noremap = true, desc = "Resume Pomodoro timer"})
 
+vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", {noremap = true, desc= "Insert Obsidian Template."})
+vim.keymap.set("n", "<leader>oo", ":ObsidianQuickSwitch<CR>", {noremap = true, desc= "Open Quick Switch in Obsidian."})
+
+
+
