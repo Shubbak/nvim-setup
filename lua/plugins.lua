@@ -229,7 +229,7 @@ require("lazy").setup({
                 {
                     name = "Default",
                     opts = {
-                        sticky = false,
+                        sticky = true,
                     },
                 },
             }
