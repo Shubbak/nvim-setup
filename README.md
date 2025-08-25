@@ -44,7 +44,7 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 ## Connect smb server (exp4)
 ```
 sudo apt install cifs-utils smbclient
-mkdir -p /mnt/exp4_all
+sudo mkdir -p /mnt/exp4_all
 sudo mount -t cifs -o username=username,password=password,domain=its-ad \\\\smb.domain.de\\server /mnt/exp4_all/
 ```
 Make it persistent by `\\\\smb.domain.de\\server /mnt/smbshare cifs credentials=/etc/smb-credentials,iocharset=utf8,sec=ntlm 0 0`
