@@ -246,14 +246,14 @@ require("lazy").setup({
             require("pomo").setup({
                 sessions = {
 
-                    pomodoro = {
+                    pomodoro = { -- 1h40m total office time && 1h15m total work time = 75%
                         presets.work, presets.window,
                         presets.work, presets.rope,
                         presets.work, presets.walk
                     },
 
                     eight = { -- 8h35m total office time && 6h15m total work time = 73%
-                        presets.work, presets.window,
+                        presets.work, presets.window,  
                         presets.work, presets.rope,
                         presets.work, presets.walk,
                         presets.work, presets.window,
