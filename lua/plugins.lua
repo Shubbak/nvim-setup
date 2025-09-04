@@ -217,13 +217,6 @@ require("lazy").setup({
                 end
         },
         config = function()
-            local work_session = {   -- just for copy and paste reasons, the unpack doesn't work
-                { name = "Work", duration = "25m" },
-                { name = "Short Break", duration = "5m" },
-                { name = "Work", duration = "25m" },
-                { name = "Short Break", duration = "5m" },
-                { name = "Work", duration = "25m" },
-            }
 
             notifiers = {
                 {
@@ -238,73 +231,131 @@ require("lazy").setup({
                 table.insert(notifiers, { name = "System"})
             end
 
+            local presets = { 
+                work = { name = "Work", duration = "25m" },
+                deep_work = { name = "Deep Work", duration = "90m" },
+                window = { name = "Look out of the window", duration = "5m" },
+                rope = { name = "Jump rope", duration = "5m" },
+                stretch = { name = "Stretch", duration = "5m" },
+                walk = { name = "Take a walk", duration = "15m" },
+                outside = { name = "Go outside", duration = "10m" },
+                long = { name = "Go eat, or.. I dunno", duration = "45m" },
+                eat = { name = "Eat or have fun or something", duration = "30m" },
+            }
+
             require("pomo").setup({
                 sessions = {
+
                     pomodoro = {
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" }
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk
                     },
 
-                    eight = { -- 8:35 total office time && 6:15h total work time
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Very Long Break", duration = "45m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
+                    eight = { -- 8h35m total office time && 6h15m total work time = 73%
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.long,
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.stretch,
+                        presets.work,
                     },
-                    six = { -- 6:30 h of total office time && 5:00h total work
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Slightly Longer Break", duration = "20m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Long Break", duration = "15m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
-                        { name = "Short Break", duration = "5m" },
-                        { name = "Work", duration = "25m" },
+
+                    deep_eight = { -- 7h45m total office time && 6h00m total work time = 77%
+                        presets.deep_work, presets.walk,
+                        presets.deep_work, presets.long,
+                        presets.deep_work, presets.walk,
+                        presets.deep_work,
+                        { name = "Wrap-up", duration = "30m" },
                     },
+
+                    seven = { -- 7h10m total office time && 5h50m total work time = 81%
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.eat,
+                        presets.work, presets.rope,
+                        presets.work, presets.window,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work,
+                    },
+
+                    sixhalf = { -- 6h40m total office time && 5h25m total work time = 81%
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.eat,
+                        presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.walk,
+                        presets.work, presets.rope,
+                        presets.work, presets.window,
+                        presets.work,
+                    },
+
+                    six = { -- 6h10m total office time && 5h00m total work time = 81%
+                        presets.work, presets.window,
+                        presets.work, presets.rope,
+                        presets.work, presets.walk,
+                        presets.work, presets.stretch,
+                        presets.work, presets.rope,
+                        presets.work, presets.eat,
+                        presets.work, presets.stretch,
+                        presets.work, presets.walk,
+                        presets.work, presets.window,
+                        presets.work, presets.window,
+                        presets.work,
+                    },
+
+                    deep_six = { -- 6h00m total office time && 5h00m work = 83%
+                        presets.deep_work, presets.walk,
+                        presets.deep_work, presets.eat,
+                        presets.deep_work, presets.walk,
+                        { name = "Wrap-up", duration = "30m" },
+                    },
+
+                    five = { -- 4h35m total office time && 3h45m total work time = 82%
+                        presets.work, presets.work, presets.outside,
+                        presets.work, presets.work, presets.eat,
+                        presets.work, presets.work, presets.work, presets.outside,
+                        presets.work, presets.work,
+                    },
+
+                    four = {  -- 4h00m total office time && 3h20m total work time = 81%
+                        presets.work, presets.work, presets.outside,
+                        presets.work, presets.work, { name = "Take a Walk", duration = "20m" },
+                        presets.work, presets.work, presets.outside,
+                        presets.work, presets.work,
+                    },
+
+                    deep_four = { -- 4h00m total office time ≈ 3h45m work = 93%
+                        presets.deep_work, presets.walk,
+                        presets.deep_work, { name = "Deep Work", duration = "45m" },
+                    },
+
+                    three = {  -- 2h55m total office time && 2h30m total work time = 86%
+                        presets.work, presets.work, presets.stretch,
+                        presets.work, presets.window,
+                        presets.work, presets.work, presets.stretch,
+                        presets.work,
+                    },
+
                 },
                 notifiers = notifiers,
             })
