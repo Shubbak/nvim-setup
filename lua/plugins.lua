@@ -344,9 +344,10 @@ require("lazy").setup({
                         presets.work, presets.work,
                     },
 
-                    deep_four = { -- 4h00m total office time ≈ 3h45m work = 93%
+                    deep_four = { -- 4h10m total office time ≈ 3h45m work = 90%
                         presets.deep_work, presets.walk,
-                        presets.deep_work, { name = "Deep Work", duration = "45m" },
+                        presets.deep_work, presets.outside,
+                        { name = "Deep Work", duration = "45m" },
                     },
 
                     three = {  -- 2h55m total office time && 2h30m total work time = 86%
