@@ -31,30 +31,17 @@ git clone https://github.com/Shubbak/nvim-setup.git $env:USERPROFILE\AppData\Loc
 
 
 # Additional considerations:
++ Make sure that the dotfiles are also cloned and execute the scripts.
 + Check whether the two fonts `MesloLGM Nerd Font Mono` and `Kawkab Mono` are correctly installed.
 + Check whether nvim can access python3 with `:checkhealth provider.python`
 + Recommended to install latexmk (included in Linux script)
 + Sometimes neovide just doesn't want to. In that case ask ChatGPT :)
++ You will need to install lsp-servers manually. maybe a #todo to automate it
+
+## For Windows
 + In case you want to add an alias in Windows, call `nvim $PROFILE` and add `New-Alias your-alias nvim` to the last line
 + If in Windows running the script doesn't do anything, try running winget and see if it prompts you to grant it rights.
 + If scripts can't run in Windows, `Get-ExecutionPolicy` and if Restricted `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-+ You will need to install lsp-servers manually. maybe a #todo to automate it
-
-# Various other things I'll need
-## Connect smb server (exp4)
-```
-sudo apt install cifs-utils smbclient
-sudo mkdir -p /mnt/exp4_all
-sudo mount -t cifs -o username=username,password=password,domain=its-ad \\\\smb.domain.de\\server /mnt/exp4_all/
-```
-Make it persistent by `\\\\smb.domain.de\\server /mnt/smbshare cifs credentials=/etc/smb-credentials,iocharset=utf8,sec=ntlm 0 0`
-and creating the credentials file `sudo nvim /etc/smb-credentials` with content:
-```
-username=username
-passwort=password
-domain=its-ad
-```
-then secure it `sudo chmod 600 /etc/smb-credentials`
 
 
 # Issues

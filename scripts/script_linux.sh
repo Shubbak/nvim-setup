@@ -1,47 +1,35 @@
 #!/bin/bash
 
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
 
 command_exists() {
     command -v "$1" &>/dev/null
 }
 
-# Install Snap if not installed
-# if ! command_exists snap 
-# then
-    # echo "Snap is not installed. Installing Snap..."
-    # sudo apt update
-    # sudo apt install -y snapd
-# else
-    # echo "Snap is already installed."
-# fi
+list_apts=(
+    "wget"
+    "unzip"
+    "neovim"
+)
 
-# Install wget and unzip if not installed
 
-if ! command_exists wget ; then
-    echo "wget not found, installing..."
-    sudo apt install -y wget
+missing_packages=()
+for apt in "${list_apts[@]}"; do
+    if ! command_exists "$apt"; then
+        missing_packages+=("$apt")
+    fi
+done
+
+if [ ${#missing_packages[@]} -gt 0 ]; then
+    sudo -v
+    echo "installing missing packages: ${missing_packages[*]}"
+    sudo apt install -y "${missing_packages[@]}" 
 else
-    echo "wget is already installed."
+    echo "all packages are installed"
 fi
 
-if ! command_exists unzip ; then
-    echo "unzip not found, installing..."
-    sudo apt install -y unzip
-else
-    echo "unzip is already installed."
-fi
-
-# Install nvim if not installed and upgrade if below v 0.12
-if ! command_exists nvim; then
-    echo "Neovim not installed. Installing Neovim..."
-    sudo apt install -y neovim
-    echo "Neovim installed!"
-else
-    echo "Neovim is already installed."
-    sudo apt upgrade neovim
-fi
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install --only-upgrade neovim
 
 if ! command_exists neovide; then
     echo "Neovide is not installed."
@@ -52,8 +40,6 @@ if ! command_exists neovide; then
     choice=${choice,,}
 
     if [[ "$choice" == "y" ]]; then
-
-        # Check if neovide is installed
 
           # Check if rust is installed
           if ! command_exists rustc; then
@@ -78,15 +64,6 @@ if ! command_exists neovide; then
     fi
 fi
 
-# Install zathura if not installed
-if ! command_exists zathura 
-then 
-    echo "Installing zathura..."
-    sudo apt install -y zathura
-    echo "zathura installed."
-else
-    echo "zathura already installed."
-fi
 
 read -p "Do you want to set up LSP for Python and LaTeX? (y/n)" choice
 choice=${choice,,}
@@ -160,7 +137,7 @@ choose_texlive_option() {
             echo "TeX Live installation complete!"
             break
         elif [[ "$choice" == "small" ]]; then
-            echo "Installing recommended TeX Live..."
+            echo "Installing minimal TeX Live..."
             sudo apt update && sudo apt install -y texlive-latex-extra texlive-xetex texlive-luatex texlive-science
             echo "TeX Live installation complete!"
             break
@@ -174,32 +151,14 @@ choose_texlive_option() {
 }
 
 # Call the function
-if command_exists tex; then
+if command_exists tex || command_exits pdflatex; then
     echo "TeX Live is installed."
 else
     choose_texlive_option
 fi
 
-# Prompt user for latexmk installation
 
-if ! command_exists latexmk; then
-    read -p "Do you want to install latexmk? (y/n): " choice
-
-    # Convert input to lowercase to handle 'Y' or 'y'
-    choice=${choice,,}
-
-    if [[ "$choice" == "y" ]]; then
-        echo "Installing latexmk..."
-        sudo apt update
-        sudo apt install -y latexmk
-        echo "latexmk installation complete!"
-    else
-        echo "Skipping latexmk installation."
-    fi
-    echo "latexmk is already installed."
-fi
-
-# Install MesloLGM Nerd Font Mono if not installed
+# Install FiraCode Nerd Font Mono if not installed
 
 FONT_NAME_MESLO="FiraCode Nerd Font Mono"
 FONT_NAME_KAWKAB="Kawkab Mono"
@@ -217,7 +176,7 @@ if ! fc-list | grep -q "$FONT_NAME_MESLO"; then
 
     wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
     unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
-    sudo fc-cache -fv
+    fc-cache -fv
     rm "$FONT_ARCHIVE"
 
     echo "$FONT_NAME_MESLO installed successfully."
@@ -232,7 +191,7 @@ if ! fc-list | grep -q "$FONT_NAME_KAWKAB"; then
 
     wget -q -O "$FONT_ARCHIVE" "$FONT_URL"
     unzip -q "$FONT_ARCHIVE" -d "$FONT_DIR"
-    sudo fc-cache -fv
+    fc-cache -fv
     rm "$FONT_ARCHIVE"
 
     echo "$FONT_NAME_KAWKAB installed successfully."
@@ -240,7 +199,4 @@ else
     echo "$FONT_NAME_KAWKAB is already installed."
 fi
 
-# echo "Installing Vim-Plug plugins..."
-# nvim --headless: +PlugInstall +qall
-# echo "Plugins installed successfully."
 
