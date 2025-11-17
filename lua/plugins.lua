@@ -490,7 +490,6 @@ require("lazy").setup({
             require("obsidian").setup({
                 workspaces = {
                     {
-                        name = "Books",
                         path = "~/Documents/Obsidian"
 
                     }
