@@ -163,7 +163,8 @@ fi
 
 FONT_NAME_MESLO="FiraCode Nerd Font Mono"
 FONT_NAME_KAWKAB="Kawkab Mono"
-FONT_DIR="$HOME/.local/share/fonts"
+# FONT_DIR="$HOME/.local/share/fonts"
+FONT_DIR="/usr/local/share/fonts"
 
 if [ ! -d "$FONT_DIR" ]
 then
