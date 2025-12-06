@@ -53,8 +53,9 @@ if ! command_exists neovide; then
 
           # Install neovide using rust
           echo "Installing Neovide..."
-          git clone https://github.com/neovide/neovide.git
-          cd neovide || exit
+          mkdir -p $HOME/Apps
+          git clone https://github.com/neovide/neovide.git $HOME/Apps/neovide
+          cd $HOME/Apps/neovide || exit
           cargo build --release
           sudo mv ./target/release/neovide /usr/local/bin/
 
