@@ -88,26 +88,27 @@ require("lazy").setup({
         end,
     },
 
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {"python", "lua", "latex"}, -- remove "latex"  if problem with vimtex / ultisnips
-                highlight = {
-                    enable = true,
-                    -- disable = { "latex" },  -- this is for ultisnips
-                    additional_vim_regex_highlighting = true   -- caution, (here)[https://github.com/nvim-treesitter/nvim-treesitter/issues/1184] it was warned that this may break stuff
-                },
-                indent = {
-                    enable = true,
-                    -- disable = { "latex" },
-                },
-                fold = {enable = true},
-            })
-        end,
-        -- ft = {"python", "lua"}
-    },
+    -- {
+        -- "nvim-treesitter/nvim-treesitter",
+        -- build = ":TSUpdate",
+        -- config = function()
+            -- require("nvim-treesitter.configs").setup({
+                -- ensure_installed = {"python", "lua", "latex"}, -- remove "latex"  if problem with vimtex / ultisnips
+                -- highlight = {
+                    -- enable = true,
+                    -- -- disable = { "latex" },  -- this is for ultisnips
+                    -- -- additional_vim_regex_highlighting = true   -- caution, (here)[https://github.com/nvim-treesitter/nvim-treesitter/issues/1184] it was warned that this may break stuff
+                -- },
+                -- indent = {
+                    -- enable = true,
+                    -- -- disable = { "latex" },
+                -- },
+                -- fold = {enable = true},
+                -- parser_install_dir = vim.fn.stdpath("data") .. "/treesitter",
+            -- })
+        -- end,
+        -- -- ft = {"python", "lua"}
+    -- },
 
     -- {
         -- "github/copilot.vim",
