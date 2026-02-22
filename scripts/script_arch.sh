@@ -20,17 +20,17 @@ sudo pacman -Syu --noconfirm
 
 # 2. Core dependencies
 echo "[2/5] Installing essential tools..."
-sudo pacman -S --noconfirm \
+sudo pacman -S --needed --noconfirm \
   neovim git ripgrep fd python-pynvim nodejs 
 
 # 3. Optional: Tree-sitter
 if ask_yes_no "Do you want to install tree-sitter CLI (for Treesitter parsers)?"; then
-    sudo pacman -S --noconfirm tree-sitter-cli
+    sudo pacman -S --needed --noconfirm tree-sitter-cli
 fi
 
 # 4. Optional: LSP servers
 if ask_yes_no "Do you want to install common LSP servers (Python, TypeScript, Bash, Lua, LaTeX)?"; then
-    sudo pacman -S --noconfirm \
+    sudo pacman -S --needed --noconfirm \
         pyright \
         typescript-language-server \
         bash-language-server \
@@ -59,7 +59,7 @@ fi
 
 # 6. Fonts (Nerd Font for icons)
 if ask_yes_no "Do you want to install Nerd Font (Fira Code) for icons?"; then
-    sudo pacman -S --noconfirm ttf-firacode-nerd
+    sudo pacman -S --needed --noconfirm ttf-firacode-nerd
     fc-cache -fv
 fi
 
